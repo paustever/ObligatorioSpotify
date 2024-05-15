@@ -1,5 +1,6 @@
 package TADS.Stack;
 
+
 public class LinkedStack<T extends Comparable<T>> implements MyStack {
         private Node<T> top;
 
