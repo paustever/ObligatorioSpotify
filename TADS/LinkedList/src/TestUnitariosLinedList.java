@@ -26,17 +26,13 @@ public class TestUnitariosLinedList {
         assertEquals(3, milista.get(1));
         assertEquals(null, milista.get(2));
     }
-
-    public boolean validar(MyList<Integer> resultado, List<Integer> expected) {
-        if (resultado.size() != expected.size()) {
-            return false;
-        }
-        for (int i = 0; i < resultado.size(); i++) {
-            if (!resultado.get(i).equals(expected.get(i))) {
-                return false;
-            }
-        }
-        return true;
+    @Test
+    public void validarSize(){
+        MyList<Integer> milista=new LinkedList<Integer>();
+        milista.add(1);
+        milista.add(2);
+        milista.add(3);
+        assertEquals(3, milista.size());
     }
 
 }
