@@ -1,5 +1,7 @@
 package TADS.Tree;
 
+import TADS.LinkedList.src.MyList;
+
 import java.util.List;
 
     public interface MyTree<K, T>  {
@@ -9,9 +11,9 @@ import java.util.List;
         int size();
         int countLeaf();
         int countCompleteElements();
-        List<K> inOrder();
-        List<K>	preOrder();
-        List<K>	postOrder();
-        List<K> pornivel();
+        MyList<K> inOrder();
+        MyList<K>	preOrder();
+        MyList<K>	postOrder();
+        MyList<K> pornivel();
     }
 

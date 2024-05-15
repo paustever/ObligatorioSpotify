@@ -1,6 +1,8 @@
 package TADS.Tree;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import TADS.LinkedList.src.MyList;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -17,8 +19,8 @@ import java.util.List;
             miarbolbi.insert(5, "E");
             miarbolbi.insert(1, "F");
             miarbolbi.insert(7, "G");
-            List<Integer> resultado1 = miarbolbi.inOrder();
-            List<Integer> expected1 = Arrays.asList(1, 2, 5, 7, 8, 9);
+            MyList<Integer> resultado1 = (MyList<Integer>) miarbolbi.inOrder();
+            MyList<Integer> expected1 = (MyList<Integer>) Arrays.asList(1, 2, 5, 7, 8, 9);
             assertEquals(expected1.size(), resultado1.size());
             assertEquals(expected1, resultado1);
         }
@@ -48,8 +50,8 @@ import java.util.List;
             miarbolbi3.insert(1, "F");
             miarbolbi3.insert(7, "G");
             miarbolbi3.delete(5);
-            List<Integer> resultado3 = miarbolbi3.inOrder();
-            List<Integer> expected3 = Arrays.asList(2,1,7,8,9);
+            MyList<Integer> resultado3 = (MyList<Integer>) miarbolbi3.inOrder();
+            MyList<Integer> expected3 = (MyList<Integer>) Arrays.asList(2,1,7,8,9);
             assertEquals(expected3.size(), resultado3.size());
             assertEquals(expected3, resultado3);
 
@@ -66,8 +68,8 @@ import java.util.List;
             miarbolbi3.insert(1, "F");
             miarbolbi3.insert(7, "G");
             miarbolbi3.delete(2);
-            List<Integer> resultado3 = miarbolbi3.inOrder();
-            List<Integer> expected3 = Arrays.asList(1,5,7,8,9);
+            MyList<Integer> resultado3 = (MyList<Integer>) miarbolbi3.inOrder();
+            MyList<Integer> expected3 = (MyList<Integer>) Arrays.asList(1,5,7,8,9);
             assertEquals(expected3, resultado3);
         }
 
@@ -82,8 +84,8 @@ import java.util.List;
             miarbolbi3.insert(1, "F");
             miarbolbi3.insert(7, "G");
             miarbolbi3.delete(8);
-            List<Integer> resultado3 = miarbolbi3.inOrder();
-            List<Integer> expected3 = Arrays.asList(1,2,5,9,7);
+            MyList<Integer> resultado3 = (MyList<Integer>) miarbolbi3.inOrder();
+            MyList<Integer> expected3 = (MyList<Integer>) Arrays.asList(1,2,5,9,7);
             assertEquals(expected3, resultado3);
         }
 
@@ -98,8 +100,8 @@ import java.util.List;
             miarbolbi3.insert(1, "F");
             miarbolbi3.insert(7, "G");
             miarbolbi3.delete(4);
-            List<Integer> resultado3 = miarbolbi3.inOrder();
-            List<Integer> expected3 = Arrays.asList(1,2,5,7,8,9);
+            MyList<Integer> resultado3 = (MyList<Integer>) miarbolbi3.inOrder();
+            MyList<Integer> expected3 = (MyList<Integer>) Arrays.asList(1,2,5,7,8,9);
             assertEquals(expected3, resultado3);
         }
 
@@ -111,8 +113,8 @@ import java.util.List;
             miarbol.insert(3,"C",1);
             miarbol.insert(3,"Z",2);
             miarbol.insert(8,"Z",1);
-            List<Integer> result =miarbol.inOrder();
-            List<Integer> expected=Arrays.asList(2,1,3);
+            MyList<Integer> result = (MyList<Integer>) miarbol.inOrder();
+            MyList<Integer> expected= (MyList<Integer>) Arrays.asList(2,1,3);
             assertEquals(expected, result);
         }
 
@@ -140,12 +142,12 @@ import java.util.List;
             miarbol.insert(5,"E",2);
             miarbol.insert(6,"F",4);
             miarbol.delete(3);
-            List<Integer> result =miarbol.inOrder();
-            List<Integer> expected=Arrays.asList(6,4,2,5,1);
+            MyList<Integer> result = (MyList<Integer>) miarbol.inOrder();
+            MyList<Integer> expected= (MyList<Integer>) Arrays.asList(6,4,2,5,1);
             assertEquals(expected, result);
             miarbol.delete(2);
-            List<Integer> result1 =miarbol.inOrder();
-            List<Integer> expected1=Arrays.asList(6,4,5,1);
+            MyList<Integer> result1 = (MyList<Integer>) miarbol.inOrder();
+            MyList<Integer> expected1= (MyList<Integer>) Arrays.asList(6,4,5,1);
             assertEquals(expected1, result1);
         }
 

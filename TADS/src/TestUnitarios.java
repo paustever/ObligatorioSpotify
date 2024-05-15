@@ -1,3 +1,7 @@
+package TADS.src;
+
+import TADS.LinkedList.src.LinkedList;
+import TADS.LinkedList.src.MyList;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,11 +15,11 @@ public class TestUnitarios {
         milista.add(1);
         milista.add(2);
         milista.add(3);
-        List<Integer> expected= new ArrayList<>();
+        MyList<Integer> expected= new LinkedList<>();
         expected.add(1);
         expected.add(2);
         expected.add(3);
-        assertEquals(true, validar(milista, expected));
+        assertEquals(true, validar(milista, (MyList<Integer>) expected));
     }
     @Test
     public void validarremouve (){
@@ -24,10 +28,10 @@ public class TestUnitarios {
         milista.add(2);
         milista.add(3);
         milista.remove(1);
-        List<Integer> expected= new ArrayList<>();
+        MyList<Integer> expected= new LinkedList<>();
         expected.add(1);
         expected.add(3);
-        assertEquals(true, validar(milista, expected));
+        assertEquals(true, validar(milista, (MyList<Integer>) expected));
     }
 
     @Test
@@ -43,7 +47,7 @@ public class TestUnitarios {
         MyList<Integer> milista = (MyList<Integer>) new LinkedList<Integer>();
         assertEquals(null, milista.get(2));
     }
-    public boolean validar(MyList<Integer> resultado, List<Integer> expected) {
+    public boolean validar(MyList<Integer> resultado, MyList<Integer> expected) {
         if (resultado.size() != expected.size()) {
             return false;
         }
