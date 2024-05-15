@@ -1,10 +1,14 @@
+package TADS.LinkedList.src;
+
+import TADS.LinkedList.src.LinkedList;
+import TADS.LinkedList.src.MyList;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestUnitarios {
+public class TestUnitariosLinedList {
     @Test
     public void testadd(){
         MyList<Integer> milista= (MyList<Integer>) new LinkedList<Integer>();

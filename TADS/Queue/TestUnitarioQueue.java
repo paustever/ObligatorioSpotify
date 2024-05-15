@@ -24,5 +24,6 @@ public class TestUnitarioQueue {
                 throw new RuntimeException(e);
             }
         }
+        return true;
     }
 }
