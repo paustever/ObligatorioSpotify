@@ -21,7 +21,7 @@ public class LinkedList<T extends Comparable<T>> implements MyList<T> {
             this.setPrimero(nuevo);
         } else {
             while (X.getSiguiente() != null) {
-                X = (Node<T>) X.getSiguiente();
+                X = X.getSiguiente();
             }
             X.setSiguiente(nuevo);
         }
@@ -31,12 +31,12 @@ public class LinkedList<T extends Comparable<T>> implements MyList<T> {
     public void remove(int position) {
         Node<T> X = this.getPrimero();
         if (position == 0) {
-            this.setPrimero((Node<T>) X.getSiguiente());
+            this.setPrimero(X.getSiguiente());
         } else {
             for (int i = 0; i < (position - 1); i++) {
-                X = (Node<T>) X.getSiguiente(); //es el anterior al que quiero eliminar
+                X = X.getSiguiente();
             }
-            Node<T> tempeliminado = (Node<T>) X.getSiguiente();
+            Node<T> tempeliminado = X.getSiguiente();
             X.setSiguiente(tempeliminado.getSiguiente());
         }
     }

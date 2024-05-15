@@ -38,6 +38,11 @@ public class TestUnitarios {
         milista.add(3);
         assertEquals(3, milista.get(2));
     }
+    @Test
+    public void validargetvacio() {
+        MyList<Integer> milista = (MyList<Integer>) new LinkedList<Integer>();
+        assertEquals(null, milista.get(2));
+    }
     public boolean validar(MyList<Integer> resultado, List<Integer> expected) {
         if (resultado.size() != expected.size()) {
             return false;
