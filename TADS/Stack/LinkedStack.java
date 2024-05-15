@@ -1,5 +1,5 @@
 package TADS.Stack;
-
+import TADS.LinkedList.src.Node ;
 
 public class LinkedStack<T extends Comparable<T>> implements MyStack {
         private Node<T> top;
@@ -36,7 +36,7 @@ public class LinkedStack<T extends Comparable<T>> implements MyStack {
             if (this.isEmpty()) {
                 throw new EmptyStackException();
             } else {
-                return (Comparable)this.top.getValue();
+                return (T) this.top.getValue();
             }
         }
 
@@ -46,4 +46,4 @@ public class LinkedStack<T extends Comparable<T>> implements MyStack {
             this.top = newNode;
         }
     }
-}
+

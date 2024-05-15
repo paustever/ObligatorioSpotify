@@ -1,3 +1,5 @@
+package TADS.LinkedList.src;
+
 import java.util.Objects;
 
 public class Node<T> {

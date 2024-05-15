@@ -1,3 +1,5 @@
+package TADS.LinkedList.src;
+
 public interface MyList<T>{
     public void add(T value);
     public void remove(int position);

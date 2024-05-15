@@ -1,3 +1,5 @@
+package TADS.LinkedList.src;
+
 public class LinkedList<T extends Comparable<T>> implements MyList<T> {
     private Node<T> primero;
 
@@ -11,7 +13,6 @@ public class LinkedList<T extends Comparable<T>> implements MyList<T> {
 
     public LinkedList() {
     }
-
 
     @Override
     public void add(T value) {
