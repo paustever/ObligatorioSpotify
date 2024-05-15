@@ -1,8 +1,6 @@
 package TADS.Tree;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import TADS.LinkedList.src.LinkedList;
+import TADS.LinkedList.src.MyList;
     public class BinarySearchTree <K extends Comparable<K>, T> implements MyBinarySearchTree {
         private TreeNode<K, T> root;
 
@@ -115,8 +113,8 @@ import java.util.List;
         }
 
         @Override
-        public List inOrder() {
-            List<K> milista = new ArrayList<>();
+        public MyList<K> inOrder() {
+            MyList<K> milista = new LinkedList<>();
             if (root != null) {
                 return root.inorder(milista);
             }
@@ -124,8 +122,8 @@ import java.util.List;
         }
 
         @Override
-        public List preOrder() {
-            List<K> milista = new ArrayList<>();
+        public MyList<K> preOrder() {
+            MyList<K> milista = new LinkedList<>();
             if (root != null) {
                 return root.preorder(milista);
             }
@@ -133,8 +131,8 @@ import java.util.List;
         }
 
         @Override
-        public List postOrder() {
-            List<K> milista = new ArrayList<>();
+        public MyList<K> postOrder() {
+            MyList<K> milista = new LinkedList<>();
             if (root != null) {
                 return root.postorder(milista);
             }

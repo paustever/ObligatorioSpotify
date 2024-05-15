@@ -1,5 +1,9 @@
 package TADS.Tree;
 
+import TADS.LinkedList.src.MyList;
+import TADS.LinkedList.src.LinkedList;
+
+
 import java.util.*;
 
     public class Tree<K extends Comparable<K>, T> implements MyTree {
@@ -105,7 +109,7 @@ import java.util.*;
         }
 
         @Override
-        public List inOrder() {
+        public MyList inOrder() {
             List<K> milista = new ArrayList<>();
             if (root != null) {
                 return root.inorder(milista);
@@ -114,8 +118,8 @@ import java.util.*;
         }
 
         @Override
-        public List<K> preOrder() {
-            List<K> milista = new ArrayList<>();
+        public MyList<K> preOrder() {
+            MyList<K> milista = new LinkedList<>();
             if (root != null) {
                 return root.preorder(milista);
             }
@@ -124,8 +128,8 @@ import java.util.*;
 
 
         @Override
-        public List<K> postOrder() {
-            List<K> milista = new ArrayList<>();
+        public MyList<K> postOrder() {
+            MyList<K> milista = new LinkedList<>();
             if (root != null) {
                 return root.postorder(milista);
             }
@@ -133,8 +137,8 @@ import java.util.*;
         }
 
         @Override
-        public List<K> pornivel() {
-            List<K> milista = new ArrayList<>();
+        public MyList<K> pornivel() {
+            MyList<K> milista = new LinkedList<>() ;
             if (root != null) {
                 Queue<TreeNode<K, T>> cola = new LinkedList<>();
                 TreeNode<K, T> temp;

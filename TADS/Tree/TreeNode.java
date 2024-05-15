@@ -1,6 +1,6 @@
 package TADS.Tree;
-import java.util.List;
-import java.util.Objects;
+import TADS.LinkedList.src.MyList;
+import TADS.LinkedList.src.LinkedList;
 
     public class TreeNode<K extends Comparable <K>,T> {
         K key;
@@ -148,7 +148,7 @@ import java.util.Objects;
             return tam;
         }
 
-        public List<K> inorder (List < K > milista) {
+        public MyList<K> inorder (MyList < K > milista) {
             if (this.leftChild != null) {
                 this.leftChild.inorder(milista);
             }
@@ -159,7 +159,7 @@ import java.util.Objects;
             return milista;
         }
 
-        public List<K> postorder (List < K > milista) {
+        public MyList<K> postorder (MyList < K > milista) {
             if (this.leftChild != null) {
                 this.leftChild.postorder(milista);
             }
@@ -170,7 +170,7 @@ import java.util.Objects;
             return milista;
         }
 
-        public List<K> preorder (List < K > milista) {
+        public MyList<K> preorder (MyList < K > milista) {
             milista.add(this.getKey());
             if (this.leftChild != null) {
                 this.leftChild.preorder(milista);

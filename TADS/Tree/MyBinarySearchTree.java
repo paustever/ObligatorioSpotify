@@ -1,11 +1,13 @@
 package TADS.Tree;
-import java.util.List;
+import TADS.LinkedList.src.MyList;
+import TADS.LinkedList.src.LinkedList;
+
     public interface MyBinarySearchTree <K extends Comparable<K>, T>{
         T findbus(K key);
         void insert (K key, T data);
         void delete (K key);
-        List<K> inOrder();
-        List<K>	preOrder();
-        List<K>	postOrder();
+        MyList<K> inOrder();
+        MyList<K>	preOrder();
+        MyList<K>	postOrder();
     }
 
