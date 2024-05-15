@@ -3,9 +3,6 @@ package TADS.Tree;
 import TADS.LinkedList.src.MyList;
 import TADS.LinkedList.src.LinkedList;
 
-
-import java.util.*;
-
     public class Tree<K extends Comparable<K>, T> implements MyTree {
         private TreeNode<K, T> root;
 
@@ -109,8 +106,8 @@ import java.util.*;
         }
 
         @Override
-        public MyList inOrder() {
-            List<K> milista = new ArrayList<>();
+        public MyList<K> inOrder() {
+            MyList<K> milista = new LinkedList<>();
             if (root != null) {
                 return root.inorder(milista);
             }
@@ -138,22 +135,13 @@ import java.util.*;
 
         @Override
         public MyList<K> pornivel() {
-            MyList<K> milista = new LinkedList<>() ;
-            if (root != null) {
-                Queue<TreeNode<K, T>> cola = new LinkedList<>();
-                TreeNode<K, T> temp;
-                cola.offer(this.root);
-                while (!cola.isEmpty()) {
-                    temp = cola.poll();
-                    milista.add(temp.getKey());
-                    if (temp.getLeftChild() != null) {
-                        cola.offer(temp.getLeftChild());
-                        if (temp.getRightChild() != null) {
-                            cola.offer(temp.getRightChild());
-                        }
-                    }
+            MyList<K> milista= new LinkedList<>();
+            if (root!= null){
+                milista.add(root.getKey());
+                return root.porNivel(milista);
                 }
-            }return milista;
+                return null;
+
         }
 
 

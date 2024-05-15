@@ -1,6 +1,5 @@
 package TADS.Tree;
 import TADS.LinkedList.src.MyList;
-import TADS.LinkedList.src.LinkedList;
 
     public interface MyBinarySearchTree <K extends Comparable<K>, T>{
         T findbus(K key);

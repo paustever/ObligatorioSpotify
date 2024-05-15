@@ -1,8 +1,10 @@
 package TADS.Tree;
 import TADS.LinkedList.src.MyList;
-import TADS.LinkedList.src.LinkedList;
 
-    public class TreeNode<K extends Comparable <K>,T> {
+import java.util.Objects;
+
+
+public class TreeNode<K extends Comparable <K>,T> {
         K key;
         T data;
         TreeNode<K, T> leftChild;
@@ -223,6 +225,18 @@ import TADS.LinkedList.src.LinkedList;
             }
             return this;
         }
+
+    public MyList<K> porNivel(MyList<K> milista){
+        if (this.leftChild!=null){
+            milista.add(this.leftChild.getKey());
+            if (this.rightChild!=null){
+                milista.add(this.rightChild.getKey());
+                this.leftChild.porNivel(milista);
+                this.rightChild.porNivel(milista);
+            }
+        }
+        return milista;
+}
     }
 
 

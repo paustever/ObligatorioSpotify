@@ -2,7 +2,6 @@ package TADS.Tree;
 
 import TADS.LinkedList.src.MyList;
 
-import java.util.List;
 
     public interface MyTree<K, T>  {
         T find(K key);
