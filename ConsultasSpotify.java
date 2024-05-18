@@ -10,7 +10,7 @@ public class ConsultasSpotify {
         return null;
     }
 
-    public MyList<Artista> Top7Artistas(LocalDate fecha_inicio, LocalDate fecha_fin){
+    public MyList<Artista> Top7Artistas(LocalDate fechaInicio, LocalDate fechaFin){
         return null;
     }
 

@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Main {
@@ -15,19 +16,36 @@ public class Main {
             int opcion = scanner.nextInt();
             switch(opcion){
                 case 1:
-                    System.out.println("1 ");
+                    System.out.println("Ingrese el país:");
+                    String pais = scanner.nextLine();
+                    System.out.println("Ingrese la fecha (YYYY-MM-DD):");
+                    LocalDate fecha = LocalDate.parse(scanner.nextLine());
                     break;
                 case 2:
-                    System.out.println("2 ");
+                    System.out.println("Ingrese la fecha (YYYY-MM-DD):");
+                    LocalDate fecha2 = LocalDate.parse(scanner.nextLine());
                     break;
                 case 3:
-                    System.out.println("3 ");
+                    System.out.println("Ingrese la fecha de inicio (YYYY-MM-DD):");
+                    LocalDate fechaInicio = LocalDate.parse(scanner.nextLine());
+                    System.out.println("Ingrese la fecha de fin (YYYY-MM-DD):");
+                    LocalDate fechaFin = LocalDate.parse(scanner.nextLine());
                     break;
                 case 4:
-                    System.out.println("4");
+                    System.out.println("Ingrese la fecha (YYYY-MM-DD):");
+                    LocalDate fecha3 = LocalDate.parse(scanner.nextLine());
+                    System.out.println("Ingrese el nombre del artista");
+                    String nombreArtiste = scanner.nextLine();
                     break;
                 case 5:
-                    System.out.println("5 ");
+                    System.out.println("Ingrese la fecha de inicio  (YYYY-MM-DD):");
+                    LocalDate fechaInicio1 = LocalDate.parse(scanner.nextLine());
+                    System.out.println("Ingrese la fecha de fin (YYYY-MM-DD):");
+                    LocalDate fechaFin1 = LocalDate.parse(scanner.nextLine());
+                    System.out.println("Ingrese el tempo de inicio (YYYY-MM-DD):");
+                    float tempoInicio = Float.parseFloat(scanner.nextLine());
+                    System.out.println("Ingrese el tempo de fin (YYYY-MM-DD):");
+                    float tempoFin = Float.parseFloat(scanner.nextLine());
                     break;
                 case 6:
                     System.out.println("Usted salio del menu ");
