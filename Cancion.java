@@ -1,16 +1,38 @@
 import TADS.LinkedList.src.MyList;
 
+import java.time.LocalDate;
+
 public class Cancion {
     MyList<Artista> listaDeArtistas;
     String nombreCancion;
-    int top;
+    int dailyRank;
+    int dailyMovement;
+    int weeklyMouvement;
+    String pais;
+    LocalDate snaphot_date;
+    int popularity;
+    boolean isExplicit;
+    int durationMs;
+    String albumName;
+    LocalDate albumReleaseDate;
+    int danceability;
+    int energy;
+    int key;
+    int loudness;
+    int mode;
+    int acoustincness;
+    int instrumentalness;
+    int liveness;
+    int valence;
+    int tempo;
+    int time_signature;
     float duracion;
 
     public Cancion(MyList<Artista> listaDeArtistas, String nombreCancion, float duracion) {
         this.listaDeArtistas = listaDeArtistas;
         this.nombreCancion = nombreCancion;
         this.duracion= duracion;
-        this.top= 0;
+        this.dailyRank= 0;
     }
 
     public MyList<Artista> getListaDeArtistas() {
@@ -27,14 +49,6 @@ public class Cancion {
 
     public void setNombreCancion(String nombreCancion) {
         this.nombreCancion = nombreCancion;
-    }
-
-    public int getTop() {
-        return top;
-    }
-
-    public void setTop(int top) {
-        this.top = top;
     }
 
     public float getDuracion() {
