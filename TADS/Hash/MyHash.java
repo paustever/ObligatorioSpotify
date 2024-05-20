@@ -1,7 +1,7 @@
 package TADS.Hash;
 
-public interface MyHash {
-    boolean pertenece(object);
-    boolean insert (object);
-    boolean eliminar (object);
+public interface MyHash<K,V> {
+    boolean contains(K key);
+    void put (K key, V value);
+    boolean remove (K key);
 }
