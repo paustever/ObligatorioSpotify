@@ -1,18 +1,22 @@
 package TADS.Hash;
 
 
+import TADS.LinkedList.src.LinkedList;
+import TADS.LinkedList.src.MyList;
+
 public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
     private int size;
     private int capacity;
     private NodoHash<K, V>[] table;
     private static final float loadfactor = 0.77F;
 
-
+    public int getCapacity() {
+        return capacity;
+    }
 
     public NodoHash<K, V>[] getTable() {
         return table;
     }
-
 
     public Hash() {
         this.capacity = 12689;
@@ -25,16 +29,17 @@ public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
         if (key == null) {
             return false;
         }
-        int contador=capacity;
+        int contador = capacity;
         int index = hash(key);
-        while (contador!=0) {
-            if(table[index]!=null){
+        while (contador != 0) {
+            if (table[index] != null) {
                 if (table[index].key.equals(key)) {
-                    return true;}
+                    return true;
+                }
             }
             index++;
             contador--;
-            if (index > capacity) {
+            if (index > capacity-1) {
                 index = 0;
             }
 
@@ -56,7 +61,7 @@ public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
                 throw new IllegalArgumentException();
             }
             index = (index + 1);
-            if (index > capacity-1) {
+            if (index > capacity - 1) {
                 index = 0;
             }
         }
@@ -88,6 +93,7 @@ public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
                 }
             }
         }
+        System.out.println("Se lanzo excepcion OK");
         return false;
     }
 
@@ -108,7 +114,6 @@ public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
     private int hash(K key) {
         return (key.hashCode()) % capacity;
     }
-
 
 }
 
