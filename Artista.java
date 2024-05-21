@@ -12,4 +12,9 @@ public class Artista implements Comparable<Artista> {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    @Override
+    public int compareTo(Artista o) {
+        return 0;
+    }
 }

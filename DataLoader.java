@@ -9,7 +9,11 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class DataLoader {
-    MyList< Artista> listadeArtistasGeneral= (MyList<Artista>) new LinkedList<Artista>();
+    MyList< Artista> listadeArtistasGeneral = (MyList<Artista>) new LinkedList<Artista>();
+
+    public DataLoader() {
+    }
+
     public MyHash<String, Cancion> cargarDatosEnHashMap(String archivoCSV) {
         MyHash<String, Cancion> HashCanciones = new Hash<>();
 
