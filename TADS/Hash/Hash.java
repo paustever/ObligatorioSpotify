@@ -1,20 +1,13 @@
 package TADS.Hash;
 
 
-public class Hash <K extends Comparable<K>, V>  implements MyHash {
+public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
     private int size;
     private int capacity;
     private NodoHash<K, V>[] table;
     private static final float loadfactor = 0.77F;
 
 
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
 
     public NodoHash<K, V>[] getTable() {
         return table;
@@ -28,25 +21,29 @@ public class Hash <K extends Comparable<K>, V>  implements MyHash {
     }
 
     @Override
-    public boolean contains(Object key) {
+    public boolean contains(K key) {
         if (key == null) {
             return false;
         }
-        int index = hash((K) key);
-        while (table[index] != null) {
-            if (table[index].key.equals(key)) {
-                return true;
+        int contador=capacity;
+        int index = hash(key);
+        while (contador!=0) {
+            if(table[index]!=null){
+                if (table[index].key.equals(key)) {
+                    return true;}
             }
-            index = (index + 1);
+            index++;
+            contador--;
             if (index > capacity) {
                 index = 0;
             }
+
         }
         return false;
     }
 
     @Override
-    public void put(Object key, Object value) throws IllegalArgumentException {
+    public void put(K key, V value) throws IllegalArgumentException {
         if (key == null || value == null) {
             throw new IllegalArgumentException();
         }
@@ -56,10 +53,12 @@ public class Hash <K extends Comparable<K>, V>  implements MyHash {
         int index = hash((K) key);
         while (table[index] != null) {
             if (table[index].key.equals(key)) {
-                table[index].setValue((V) value);
-                return;
+                throw new IllegalArgumentException();
             }
-            index = (index + 1) % capacity; // linear probing
+            index = (index + 1);
+            if (index > capacity-1) {
+                index = 0;
+            }
         }
         table[index] = new NodoHash<>((K) key, (V) value);
         size++;
@@ -67,7 +66,28 @@ public class Hash <K extends Comparable<K>, V>  implements MyHash {
 
 
     @Override
-    public boolean remove(Object key) {
+    public boolean remove(K key) throws IllegalArgumentException {
+        if (key == null) {
+            throw new IllegalArgumentException();
+        }
+        int index = hash(key);
+        if (this.contains(key)) {
+            boolean buscar = true;
+            while (buscar) {
+                if (table[index] != null) {
+                    if (table[index].key.equals(key)) {
+                        table[index] = null;
+                        size--;
+                        return true;
+                    } else {
+                        index++;
+                        if (index > capacity - 1) {
+                            index = 0;
+                        }
+                    }
+                }
+            }
+        }
         return false;
     }
 
@@ -88,5 +108,7 @@ public class Hash <K extends Comparable<K>, V>  implements MyHash {
     private int hash(K key) {
         return (key.hashCode()) % capacity;
     }
+
+
 }
 
