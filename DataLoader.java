@@ -14,8 +14,8 @@ public class DataLoader {
     public DataLoader() {
     }
 
-    public MyHash<LocalDate, MyHash<Integer, MyHash<String, Cancion>>> cargarDatosEnHashMap(String archivoCSV) {
-        Hash<Object, MyHash<Integer, MyHash<String, Cancion>>> resultado = new Hash<>();
+    public MyHash<String, MyHash<String,  MyHash<String, Cancion>>> cargarDatosEnHashMap(String archivoCSV) {
+        Hash<String, MyHash<String, MyHash<String, Cancion>>> resultado = new Hash<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             String linea;
@@ -42,46 +42,28 @@ public class DataLoader {
                 int weeklyMovement = Integer.parseInt(datos.get(5));
                 String pais = datos.get(6);
                 LocalDate snapshotDate= LocalDate.parse(datos.get(7));
-                int popluarity  = Integer.parseInt(datos.get(8));
-                boolean isExplicit = Boolean.parseBoolean(datos.get(9));
-                int durationMs  = Integer.parseInt(datos.get(10));
-                String albumName = datos.get(11);
-                LocalDate albumRealeaseDate = LocalDate.parse(datos.get(12));
-                float danceability = Float.parseFloat(datos.get(13));
-                float energy = Float.parseFloat(datos.get(14));
-                int key = Integer.parseInt(datos.get(15));
-                float loudness = Float.parseFloat(datos.get(16));
-                int mode = Integer.parseInt(datos.get(17));
-                float speechiness = Float.parseFloat(datos.get(18));
-                float acousticness = Float.parseFloat(datos.get(19));
-                float instrumentalness = Float.parseFloat(datos.get(20));
-                float liveness = Float.parseFloat(datos.get(21));
-                float valence = Float.parseFloat(datos.get(22));
                 float tempo = Float.parseFloat(datos.get(23));
-                int timeSignature= Integer.parseInt(datos.get(24));
-                Cancion cancion = new Cancion(spotifyId, listaDeArtistas, nombre,dailyRank,dailyMovement,weeklyMovement, pais,snapshotDate, popluarity,isExplicit,durationMs,albumName, albumRealeaseDate, danceability,energy, key, loudness, mode,speechiness, acousticness,instrumentalness,liveness,valence, tempo, timeSignature);
-                if (resultado.contains(snapshotDate)){
-                    Hash HashdePaisesParaElDia = (Hash) resultado.get(snapshotDate);
-                    if (HashdePaisesParaElDia.contains(pais)){
-                        Hash HashDeCancionesPPD = (Hash) HashdePaisesParaElDia.get(pais);
-                        HashDeCancionesPPD.put();
-                    }
-                }else {
-                    MyHash nuevopaisHash= new Hash();
-
-                    resultado.put(diaHash,nuevopaisHash );
-
+                Cancion cancion = new Cancion(spotifyId, listaDeArtistas, nombre,dailyRank,dailyMovement,weeklyMovement, pais,snapshotDate,tempo);
+                String dia = String.valueOf(snapshotDate);
+                if (!resultado.contains(dia)) {
+                    resultado.put(dia, new Hash<>());
                 }
+                MyHash<String, MyHash<String, Cancion>> countryMap = resultado.get(dia);
 
-                HashCanciones.put(spotifyId, cancion);
+                if (!countryMap.contains(pais)) {
+                    countryMap.put(pais, new Hash<>());
+                }
+                MyHash<String, Cancion> songMap = countryMap.get(pais);
+                songMap.put(spotifyId, cancion);
             }
 
         } catch (IOException | IllegalArgumentException  e) {
             System.out.println("hubo algun problema");
         }
 
-        return HashCanciones;
+        return resultado;
     }
+
 
     private MyList<String> parsearLineaCSV(String linea) {
         MyList<String> campos = new TADS.LinkedList.src.LinkedList<>();

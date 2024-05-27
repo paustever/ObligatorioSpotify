@@ -20,6 +20,7 @@ public class Main {
                     String pais = scanner.nextLine();
                     System.out.println("Ingrese la fecha (YYYY-MM-DD):");
                     LocalDate fecha = LocalDate.parse(scanner.nextLine());
+
                     break;
                 case 2:
                     System.out.println("Ingrese la fecha (YYYY-MM-DD):");

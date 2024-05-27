@@ -115,7 +115,6 @@ public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
             if (index > capacity-1) {
                 index = 0;
             }
-
         }
         return null;
     }
