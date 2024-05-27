@@ -14,8 +14,8 @@ public class DataLoader {
     public DataLoader() {
     }
 
-    public MyHash<String, Cancion> cargarDatosEnHashMap(String archivoCSV) {
-        MyHash<String, Cancion> HashCanciones = new Hash<>();
+    public MyHash<LocalDate, MyHash<Integer, MyHash<String, Cancion>>> cargarDatosEnHashMap(String archivoCSV) {
+        Hash<Object, MyHash<Integer, MyHash<String, Cancion>>> resultado = new Hash<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             String linea;
@@ -60,6 +60,19 @@ public class DataLoader {
                 float tempo = Float.parseFloat(datos.get(23));
                 int timeSignature= Integer.parseInt(datos.get(24));
                 Cancion cancion = new Cancion(spotifyId, listaDeArtistas, nombre,dailyRank,dailyMovement,weeklyMovement, pais,snapshotDate, popluarity,isExplicit,durationMs,albumName, albumRealeaseDate, danceability,energy, key, loudness, mode,speechiness, acousticness,instrumentalness,liveness,valence, tempo, timeSignature);
+                if (resultado.contains(snapshotDate)){
+                    Hash HashdePaisesParaElDia = (Hash) resultado.get(snapshotDate);
+                    if (HashdePaisesParaElDia.contains(pais)){
+                        Hash HashDeCancionesPPD = (Hash) HashdePaisesParaElDia.get(pais);
+                        HashDeCancionesPPD.put();
+                    }
+                }else {
+                    MyHash nuevopaisHash= new Hash();
+
+                    resultado.put(diaHash,nuevopaisHash );
+
+                }
+
                 HashCanciones.put(spotifyId, cancion);
             }
 

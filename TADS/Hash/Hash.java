@@ -97,6 +97,29 @@ public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
         return false;
     }
 
+    @Override
+    public V get(K key) {
+        if (key == null) {
+            return null;
+        }
+        int contador = capacity;
+        int index = hash(key);
+        while (contador != 0) {
+            if (table[index] != null) {
+                if (table[index].key.equals(key)) {
+                    return table[index].getValue();
+                }
+            }
+            index++;
+            contador--;
+            if (index > capacity-1) {
+                index = 0;
+            }
+
+        }
+        return null;
+    }
+
 
     private void resize() throws IllegalArgumentException {
         NodoHash<K, V>[] oldTable = table;
