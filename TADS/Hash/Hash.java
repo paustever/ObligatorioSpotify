@@ -24,6 +24,22 @@ public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
         this.size = 0;
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public void setTable(NodoHash<K, V>[] table) {
+        this.table = table;
+    }
+
     @Override
     public boolean contains(K key) {
         if (key == null) {

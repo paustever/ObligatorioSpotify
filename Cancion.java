@@ -24,6 +24,54 @@ public class Cancion {
         this.tempo = tempo;
     }
 
+    public int getDailyRank() {
+        return dailyRank;
+    }
+
+    public void setDailyRank(int dailyRank) {
+        this.dailyRank = dailyRank;
+    }
+
+    public int getDailyMovement() {
+        return dailyMovement;
+    }
+
+    public void setDailyMovement(int dailyMovement) {
+        this.dailyMovement = dailyMovement;
+    }
+
+    public int getWeeklyMouvement() {
+        return weeklyMouvement;
+    }
+
+    public void setWeeklyMouvement(int weeklyMouvement) {
+        this.weeklyMouvement = weeklyMouvement;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public LocalDate getSnaphot_date() {
+        return snaphot_date;
+    }
+
+    public void setSnaphot_date(LocalDate snaphot_date) {
+        this.snaphot_date = snaphot_date;
+    }
+
+    public float getTempo() {
+        return tempo;
+    }
+
+    public void setTempo(float tempo) {
+        this.tempo = tempo;
+    }
+
     public MyList<Artista> getListaDeArtistas() {
         return listaDeArtistas;
     }
