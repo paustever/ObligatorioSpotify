@@ -1,12 +1,14 @@
+import TADS.Hash.MyHash;
+import TADS.LinkedList.src.MyList;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         DataLoader dataLoader = new DataLoader();
         String archivoCSV = "/Users/paula/Desktop/SpotifyData.csv";
-        dataLoader.cargarDatosEnHashMap(archivoCSV);
-        Scanner scanner = new Scanner(System.in);
+        MyHash datos = dataLoader.cargarDatosEnHashMap(archivoCSV);
         boolean seguir = true;
         boolean continuar = true;
         while (continuar) {
@@ -17,7 +19,6 @@ public class Main {
             int opcion1 = scanner.nextInt();
             switch (opcion1) {
                 case 1:
-                    DataLoader datos = new DataLoader();
                     System.out.println("La carga de datos se realizo con exito ");
                     break;
                 case 2:
@@ -29,6 +30,7 @@ public class Main {
                         System.out.println("4. Cantidad de veces que aparece un artista específico en un top 50 en una fecha dada");
                         System.out.println("5. Cantidad de canciones con un tempo en un rango específico para un rango específico de fechas");
                         System.out.println("6. Salir");
+                        ConsultasSpotify consultas = new ConsultasSpotify(datos);
                         int opcion2 = scanner.nextInt();
                         switch (opcion2) {
                             case 1:
@@ -36,23 +38,33 @@ public class Main {
                                 String pais = scanner.nextLine();
                                 System.out.println("Ingrese la fecha (YYYY-MM-DD):");
                                 LocalDate fecha = LocalDate.parse(scanner.nextLine());
-
+                                consultas.Top10(pais,fecha);
                                 break;
                             case 2:
                                 System.out.println("Ingrese la fecha (YYYY-MM-DD):");
                                 LocalDate fecha2 = LocalDate.parse(scanner.nextLine());
+                                consultas.Top5(fecha2);
                                 break;
                             case 3:
                                 System.out.println("Ingrese la fecha de inicio (YYYY-MM-DD):");
                                 LocalDate fechaInicio = LocalDate.parse(scanner.nextLine());
                                 System.out.println("Ingrese la fecha de fin (YYYY-MM-DD):");
                                 LocalDate fechaFin = LocalDate.parse(scanner.nextLine());
+                                consultas.Top7Artistas(fechaInicio,fechaFin);
                                 break;
                             case 4:
                                 System.out.println("Ingrese la fecha (YYYY-MM-DD):");
                                 LocalDate fecha3 = LocalDate.parse(scanner.nextLine());
                                 System.out.println("Ingrese el nombre del artista");
-                                String nombreArtiste = scanner.nextLine();
+                                String nombreArtista = scanner.nextLine();
+                                MyList<Artista> listaArtistas = dataLoader.getListadeArtistasGeneral();
+                                Artista artista= null;
+                                for (int i =0; i < listaArtistas.size(); i ++){
+                                    if (listaArtistas.get(i).getNombre()== nombreArtista){
+                                        artista= listaArtistas.get(i);
+                                    }
+                                }
+                                consultas.numeroArtistaTop(fecha3, artista);
                                 break;
                             case 5:
                                 System.out.println("Ingrese la fecha de inicio  (YYYY-MM-DD):");
@@ -63,6 +75,7 @@ public class Main {
                                 float tempoInicio = Float.parseFloat(scanner.nextLine());
                                 System.out.println("Ingrese el tempo de fin (YYYY-MM-DD):");
                                 float tempoFin = Float.parseFloat(scanner.nextLine());
+                                consultas.CantidadCanciones(fechaInicio1,fechaFin1,tempoInicio,tempoFin);
                                 break;
                             case 6:
                                 System.out.println("Usted salio del menu ");

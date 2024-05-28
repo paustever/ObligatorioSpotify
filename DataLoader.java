@@ -15,8 +15,16 @@ public class DataLoader {
         this.listadeArtistasGeneral = new TADS.LinkedList.src.LinkedList<>();
     }
 
+    public MyList<Artista> getListadeArtistasGeneral() {
+        return listadeArtistasGeneral;
+    }
+
+    public void setListadeArtistasGeneral(MyList<Artista> listadeArtistasGeneral) {
+        this.listadeArtistasGeneral = listadeArtistasGeneral;
+    }
+
     public MyHash<String, MyHash<String,  MyHash<String, Cancion>>> cargarDatosEnHashMap(String archivoCSV) {
-        Hash<String, MyHash<String, MyHash<String, Cancion>>> resultado = new Hash<>();
+        MyHash<String, MyHash<String, MyHash<String, Cancion>>> resultado = new Hash<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             String linea;

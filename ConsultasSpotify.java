@@ -3,21 +3,20 @@ import TADS.Hash.MyHash;
 import TADS.LinkedList.src.MyList;
 import TADS.Tree.BinarySearchTree;
 import TADS.Tree.MyBinarySearchTree;
-
 import java.time.LocalDate;
 
 public class ConsultasSpotify implements Consultas {
-    Hash<String, MyHash<String, MyHash<String, Cancion>>> miHash;
+    MyHash<String, MyHash<String, MyHash<String, Cancion>>> miHash;
 
-    public ConsultasSpotify(Hash datos ) {
+    public ConsultasSpotify(MyHash datos ) {
         this.miHash = datos;
     }
 
-    public Hash<String, MyHash<String, MyHash<String, Cancion>>> getMiHash() {
+    public MyHash<String, MyHash<String, MyHash<String, Cancion>>> getMiHash() {
         return miHash;
     }
 
-    public void setMiHash(Hash<String, MyHash<String, MyHash<String, Cancion>>> miHash) {
+    public void setMiHash(MyHash<String, MyHash<String, MyHash<String, Cancion>>> miHash) {
         this.miHash = miHash;
     }
 
