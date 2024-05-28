@@ -10,25 +10,10 @@ public class Cancion {
     int weeklyMouvement;
     String pais;
     LocalDate snaphot_date;
-    int popularity;
-    boolean isExplicit;
-    int durationMs;
-    String albumName;
-    LocalDate albumReleaseDate;
-    float danceability;
-    float energy;
-    int key;
-    float loudness;
-    int mode;
-    float acoustincness;
-    float instrumentalness;
-    float liveness;
-    float valence;
     float tempo;
-    int time_signature;
 
 
-    public Cancion(String spotifyId, MyList<Artista> listaDeArtistas, String nombreCancion, int dailyRank, int dailyMovement, int weeklyMouvement, String pais, LocalDate snaphot_date, int popularity, boolean isExplicit, int durationMs, String albumName, LocalDate albumReleaseDate, float danceability, float energy, int key, float loudness, int mode, float acoustincness, float instrumentalness, float liveness, float valence, float tempo, float v, int time_signature) {
+    public Cancion(String spotifyId, MyList<Artista> listaDeArtistas, String nombreCancion, int dailyRank, int dailyMovement, int weeklyMouvement, String pais, LocalDate snaphot_date, float tempo) {
         this.listaDeArtistas = listaDeArtistas;
         this.nombreCancion = nombreCancion;
         this.dailyRank = dailyRank;
@@ -36,22 +21,55 @@ public class Cancion {
         this.weeklyMouvement = weeklyMouvement;
         this.pais = pais;
         this.snaphot_date = snaphot_date;
-        this.popularity = popularity;
-        this.isExplicit = isExplicit;
-        this.durationMs = durationMs;
-        this.albumName = albumName;
-        this.albumReleaseDate = albumReleaseDate;
-        this.danceability = danceability;
-        this.energy = energy;
-        this.key = key;
-        this.loudness = loudness;
-        this.mode = mode;
-        this.acoustincness = acoustincness;
-        this.instrumentalness = instrumentalness;
-        this.liveness = liveness;
-        this.valence = valence;
         this.tempo = tempo;
-        this.time_signature = time_signature;
+    }
+
+    public int getDailyRank() {
+        return dailyRank;
+    }
+
+    public void setDailyRank(int dailyRank) {
+        this.dailyRank = dailyRank;
+    }
+
+    public int getDailyMovement() {
+        return dailyMovement;
+    }
+
+    public void setDailyMovement(int dailyMovement) {
+        this.dailyMovement = dailyMovement;
+    }
+
+    public int getWeeklyMouvement() {
+        return weeklyMouvement;
+    }
+
+    public void setWeeklyMouvement(int weeklyMouvement) {
+        this.weeklyMouvement = weeklyMouvement;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public LocalDate getSnaphot_date() {
+        return snaphot_date;
+    }
+
+    public void setSnaphot_date(LocalDate snaphot_date) {
+        this.snaphot_date = snaphot_date;
+    }
+
+    public float getTempo() {
+        return tempo;
+    }
+
+    public void setTempo(float tempo) {
+        this.tempo = tempo;
     }
 
     public MyList<Artista> getListaDeArtistas() {
