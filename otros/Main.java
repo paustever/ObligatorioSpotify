@@ -10,8 +10,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         DataLoader dataLoader = new DataLoader();
         String archivoCSV = "/Users/paula/Desktop/SpotifyData.csv";
-        MyHash datos = dataLoader.cargarDatosEnHashMap(archivoCSV);
         boolean seguir = true;
+        MyHash datos = null;
         boolean continuar = true;
         while (continuar) {
             System.out.println("Seleccione una opcion ");
@@ -22,6 +22,7 @@ public class Main {
             switch (opcion1) {
                 case 1:
                     System.out.println("La carga de datos se realizo con exito ");
+                    datos = dataLoader.cargarDatosEnHashMap(archivoCSV);
                     break;
                 case 2:
                     while (seguir) {

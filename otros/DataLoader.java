@@ -27,20 +27,21 @@ public class DataLoader {
 
     public MyHash<String, MyHash<String,  MyHash<String, Cancion>>> cargarDatosEnHashMap(String archivoCSV) {
         MyHash<String, MyHash<String, MyHash<String, Cancion>>> resultado = new Hash<>();
-
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 MyList<String> datos = parsearLineaCSV(linea);
                 String spotifyId = datos.get(0);
+                System.out.println(spotifyId);
                 String nombre = datos.get(1);
+                System.out.println(nombre);
                 String artistas = datos.get(2);
                 String[] artista = artistas.split(",");
                 MyList<Artista> listaDeArtistas = null;
                 for (String esteArtista : artista) {
                     Artista artistaNuevo= null;
                     for (int i = 0 ; i<listadeArtistasGeneral.size(); i ++){
-                        if ( listaDeArtistas.get(i).getNombre() == esteArtista ){
+                        if ( listaDeArtistas.get(i).getNombre().equals(esteArtista)){
                             artistaNuevo= listaDeArtistas.get(i);
                             listaDeArtistas.add(artistaNuevo);
                         }
