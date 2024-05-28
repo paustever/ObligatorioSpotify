@@ -9,8 +9,8 @@ import java.time.LocalDate;
 public class ConsultasSpotify implements Consultas {
     Hash<String, MyHash<String, MyHash<String, Cancion>>> miHash;
 
-    public ConsultasSpotify() {
-        this.miHash = null;
+    public ConsultasSpotify(Hash datos ) {
+        this.miHash = datos;
     }
 
     public Hash<String, MyHash<String, MyHash<String, Cancion>>> getMiHash() {
@@ -41,16 +41,16 @@ public class ConsultasSpotify implements Consultas {
         MyList<Cancion> TopOrdenado = Top.inOrder();
         for (int i = 0 ; i< TopOrdenado.size(); i ++){
             System.out.println("Top 10 canciones mas escuchadas en " + pais + " en el dia " + dia);
-            System.out.println("1. " + TopOrdenado.get(0));// falta poner los gets de lo q te pide la funcion
-            System.out.println("2. " + TopOrdenado.get(1));
-            System.out.println("3. " + TopOrdenado.get(2));
-            System.out.println("4. " + TopOrdenado.get(3));
-            System.out.println("5. " + TopOrdenado.get(4));
-            System.out.println("6. " + TopOrdenado.get(5));
-            System.out.println("7. " + TopOrdenado.get(6));
-            System.out.println("8. " + TopOrdenado.get(7));
-            System.out.println("9. " + TopOrdenado.get(8));
-            System.out.println("10. " + TopOrdenado.get(9));
+            System.out.println("1. " + TopOrdenado.get(0).getNombreCancion()+ TopOrdenado.get(0).getListaDeArtistas());
+            System.out.println("2. " + TopOrdenado.get(1).getNombreCancion()+ TopOrdenado.get(1).getListaDeArtistas());
+            System.out.println("3. " + TopOrdenado.get(2).getNombreCancion()+ TopOrdenado.get(2).getListaDeArtistas());
+            System.out.println("4. " + TopOrdenado.get(3).getNombreCancion()+ TopOrdenado.get(3).getListaDeArtistas());
+            System.out.println("5. " + TopOrdenado.get(4).getNombreCancion()+ TopOrdenado.get(4).getListaDeArtistas());
+            System.out.println("6. " + TopOrdenado.get(5).getNombreCancion()+ TopOrdenado.get(5).getListaDeArtistas());
+            System.out.println("7. " + TopOrdenado.get(6).getNombreCancion()+ TopOrdenado.get(6).getListaDeArtistas());
+            System.out.println("8. " + TopOrdenado.get(7).getNombreCancion()+ TopOrdenado.get(7).getListaDeArtistas());
+            System.out.println("9. " + TopOrdenado.get(8).getNombreCancion()+ TopOrdenado.get(8).getListaDeArtistas());
+            System.out.println("10. " + TopOrdenado.get(9).getNombreCancion()+ TopOrdenado.get(9).getListaDeArtistas());
 
         }
         return TopOrdenado;
