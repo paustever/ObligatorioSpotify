@@ -1,3 +1,5 @@
+package otros;
+
 public class Artista implements Comparable<Artista> {
     String nombre;
 

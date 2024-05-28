@@ -1,4 +1,4 @@
-package TADS.Hash;
+package TADS.hash;
 
 public class IllegalArgumentException extends Exception{
 }

@@ -1,4 +1,6 @@
-import TADS.Hash.MyHash;
+package otros;
+
+import TADS.hash.MyHash;
 import TADS.LinkedList.src.MyList;
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -14,7 +16,7 @@ public class Main {
         while (continuar) {
             System.out.println("Seleccione una opcion ");
             System.out.println("1. Carga de datos ");
-            System.out.println("2. Consultas ");
+            System.out.println("2. otros.Consultas ");
             System.out.println("3. Salir");
             int opcion1 = scanner.nextInt();
             switch (opcion1) {

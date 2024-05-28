@@ -1,8 +1,6 @@
-package TADS.Hash;
+package TADS.hash;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import TADS.LinkedList.src.LinkedList;
-import TADS.LinkedList.src.MyList;
 import org.junit.jupiter.api.Test;
 
 public class TestUnitarioHash <K extends Comparable<K>, V> {

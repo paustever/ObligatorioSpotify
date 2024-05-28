@@ -1,6 +1,4 @@
-package TADS.Hash;
-
-import java.util.Objects;
+package TADS.hash;
 
 public class NodoHash <K extends Comparable<K>, V>{
     K key;

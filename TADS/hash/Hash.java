@@ -1,8 +1,5 @@
-package TADS.Hash;
+package TADS.hash;
 
-
-import TADS.LinkedList.src.LinkedList;
-import TADS.LinkedList.src.MyList;
 
 public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
     private int size;

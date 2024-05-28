@@ -1,6 +1,8 @@
-import TADS.Hash.Hash;
-import TADS.Hash.IllegalArgumentException;
-import TADS.Hash.MyHash;
+package otros;
+
+import TADS.hash.Hash;
+import TADS.hash.IllegalArgumentException;
+import TADS.hash.MyHash;
 import TADS.LinkedList.src.MyList;
 import java.io.BufferedReader;
 import java.io.FileReader;

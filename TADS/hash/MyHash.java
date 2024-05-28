@@ -1,6 +1,4 @@
-package TADS.Hash;
-
-import TADS.LinkedList.src.MyList;
+package TADS.hash;
 
 public interface MyHash<K extends Comparable<K>,V> {
     boolean contains(K key);
