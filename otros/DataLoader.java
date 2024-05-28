@@ -1,5 +1,6 @@
 package otros;
 
+import TADS.LinkedList.src.LinkedList;
 import TADS.hash.Hash;
 import TADS.hash.IllegalArgumentException;
 import TADS.hash.MyHash;
@@ -77,21 +78,23 @@ public class DataLoader {
     }
 
 
-    private MyList<String> parsearLineaCSV(String linea) {
-        MyList<String> campos = new TADS.LinkedList.src.LinkedList<>();
+    private static MyList<String> parsearLineaCSV(String linea) {
+        MyList<String> campos = new LinkedList<>();
         StringBuilder campoActual = new StringBuilder();
         boolean dentroDeComillas = false;
-        for (char c: linea.toCharArray()){
-            if (c =='"'){
-                dentroDeComillas= !dentroDeComillas;
+
+        for (char c : linea.toCharArray()) {
+            if (c == '"') {
+                dentroDeComillas = !dentroDeComillas;
             } else if (c == ',' && !dentroDeComillas) {
                 campos.add(campoActual.toString());
-                campoActual= new StringBuilder();
-            }else {
+                campoActual = new StringBuilder();
+            } else {
                 campoActual.append(c);
             }
         }
         campos.add(campoActual.toString());
+
         return campos;
     }
 }
