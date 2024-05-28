@@ -12,8 +12,8 @@ public class DataLoader {
     MyList< Artista> listadeArtistasGeneral = (MyList<Artista>) new LinkedList<Artista>();
 
     public DataLoader() {
+        this.listadeArtistasGeneral = null;
     }
-
     public MyHash<String, MyHash<String,  MyHash<String, Cancion>>> cargarDatosEnHashMap(String archivoCSV) {
         Hash<String, MyHash<String, MyHash<String, Cancion>>> resultado = new Hash<>();
 
