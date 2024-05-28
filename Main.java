@@ -3,15 +3,17 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        DataLoader dataLoader = new DataLoader();
+        String archivoCSV = "/Users/paula/Desktop/SpotifyData.csv";
+        dataLoader.cargarDatosEnHashMap(archivoCSV);
         Scanner scanner = new Scanner(System.in);
-        boolean seguir = true ;
+        boolean seguir = true;
         System.out.println("Seleccione una opcion ");
         System.out.println("1. Carga de datos ");
         System.out.println("2. Consultas ");
         int opcion1 = scanner.nextInt();
-        switch(opcion1) {
+        switch (opcion1) {
             case 1:
-                DataLoader datos = new DataLoader();
                 System.out.println("La carga de datos se realizo con exito ");
                 break;
             case 2:
@@ -23,8 +25,8 @@ public class Main {
                     System.out.println("4. Cantidad de veces que aparece un artista específico en un top 50 en una fecha dada");
                     System.out.println("5. Cantidad de canciones con un tempo en un rango específico para un rango específico de fechas");
                     System.out.println("6. Salir");
-                    int opcion2 = scanner.nextInt();
-                    switch (opcion2) {
+                    int opcion = scanner.nextInt();
+                    switch (opcion) {
                         case 1:
                             System.out.println("Ingrese el país:");
                             String pais = scanner.nextLine();
@@ -67,6 +69,8 @@ public class Main {
                             break;
                     }
                 }
+
         }
     }
 }
+

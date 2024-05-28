@@ -1,19 +1,20 @@
 import TADS.Hash.Hash;
 import TADS.Hash.IllegalArgumentException;
 import TADS.Hash.MyHash;
-import TADS.LinkedList.src.LinkedList;
 import TADS.LinkedList.src.MyList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class DataLoader {
-    MyList< Artista> listadeArtistasGeneral = (MyList<Artista>) new LinkedList<Artista>();
 
+
+public class DataLoader {
+    MyList< Artista> listadeArtistasGeneral;
     public DataLoader() {
-        this.listadeArtistasGeneral = null;
+        this.listadeArtistasGeneral = new TADS.LinkedList.src.LinkedList<>();
     }
+
     public MyHash<String, MyHash<String,  MyHash<String, Cancion>>> cargarDatosEnHashMap(String archivoCSV) {
         Hash<String, MyHash<String, MyHash<String, Cancion>>> resultado = new Hash<>();
 
