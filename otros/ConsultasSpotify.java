@@ -138,7 +138,11 @@ public class ConsultasSpotify implements Consultas {
 
     @Override
     public int CantidadCanciones(LocalDate fechaInicio, LocalDate fechaFin, float tempoMenor, float tempoMayor) {
-        return 0;
+        MyList<Cancion> milista= new LinkedList<>();
+        for (LocalDate date = fechaInicio; !date.isAfter(fechaFin); date = date.plusDays(1)){
+            milista= CancionesTempos(date, milista, tempoMenor,tempoMayor);
+        }
+        return milista.size();
     }
 
     public MyList<Cancion> Top50(LocalDate dia, MyList milista) {
@@ -175,5 +179,24 @@ public class ConsultasSpotify implements Consultas {
             resultado.add(temp);
         }
         return resultado;
+    }
+
+    public MyList<Cancion> CancionesTempos(LocalDate dia, MyList milista,float tempoMenor, float tempoMayor ) {
+        String diaString = String.valueOf(dia);
+        if (miHash == null) {
+            return null;
+        } else if (miHash.contains(diaString)) {
+            Hash hashdia = (Hash) miHash.get(diaString);
+            for (int i = 0; i < hashdia.getSize(); i++) {
+                Hash hashpais = (Hash) hashdia.getTable()[i].getValue();
+                for (int j = 0; j < hashpais.getSize(); i++) {
+                    Cancion cancioni = (Cancion) hashpais.getTable()[j].getValue();
+                    if (cancioni.tempo<tempoMayor && cancioni.tempo> tempoMenor && !milista.contains(cancioni) ) {
+                        milista.add(cancioni);
+                    }
+                }
+            }
+        }
+        return milista;
     }
 }
