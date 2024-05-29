@@ -70,55 +70,55 @@ public class ConsultasSpotify implements Consultas {
         if (paises == null) {
             System.out.println("no hay Top 5 de canciones para este dia");
         }
-        milista= Top50(dia,milista);
-        for (int i =0 ; i<milista.size(); i++){
-            songcount cancionCont = new songcount(milista.get(i), 1 );
+        milista = Top50(dia, milista);
+        for (int i = 0; i < milista.size(); i++) {
+            songcount cancionCont = new songcount(milista.get(i), 1);
             int miIndice = listacontadora.search(cancionCont);
-            if (miIndice!=-1){
-                int tempcount = listacontadora.get(miIndice).getCount() +1 ;
+            if (miIndice != -1) {
+                int tempcount = listacontadora.get(miIndice).getCount() + 1;
                 listacontadora.get(miIndice).setCount(tempcount);
-            }else {
+            } else {
                 listacontadora.add(cancionCont);
             }
         }
-        MyList<songcount> resultado = listaOrdenada(5,listacontadora);
-        for (int i =0; i < resultado.size(); i ++){
+        MyList<songcount> resultado = listaOrdenada(5, listacontadora);
+        for (int i = 0; i < resultado.size(); i++) {
             Cancion cancion = (Cancion) resultado.get(i).getValue();
-            System.out.println((i+1) + "."+ cancion.getNombreCancion() + cancion.getListaDeArtistas());
+            System.out.println((i + 1) + "." + cancion.getNombreCancion() + cancion.getListaDeArtistas());
         }
 
     }
 
     @Override
-    public MyList<Artista> Top7Artistas(LocalDate fechaInicio, LocalDate fechaFin) {
+    public void  Top7Artistas(LocalDate fechaInicio, LocalDate fechaFin) {
         MyList<Cancion> milista = new LinkedList();
         MyList<Cancion> milista1 = new LinkedList<>();
-        MyList<songcount> lisacontadora =  new LinkedList<>();
+        MyList<songcount> lisacontadora = new LinkedList<>();
         for (LocalDate date = fechaInicio; !date.isAfter(fechaFin); date = date.plusDays(1)) {
-                milista1=Top50(date,milista1);
+            milista1 = Top50(date, milista1);
         }
-        for (int f = 0 ; f<milista1.size(); f++){
-            if (!milista.contains(milista1.get(f))){
+        for (int f = 0; f < milista1.size(); f++) {
+            if (!milista.contains(milista1.get(f))) {
                 milista.add(milista1.get(f));
             }
         }
-        for (int i = 0; i<milista.size(); i ++){
+        for (int i = 0; i < milista.size(); i++) {
             MyList<Artista> artistasi = milista.get(i).listaDeArtistas;
-            for (int j =0; j< artistasi.size(); j++){
+            for (int j = 0; j < artistasi.size(); j++) {
                 songcount artistacont = new songcount<>(artistasi.get(j), 1);
-                int indice =lisacontadora.search(artistacont) ;
-                if (indice != -1){
-                    int tempcount = lisacontadora.get(indice).getCount()+1;
+                int indice = lisacontadora.search(artistacont);
+                if (indice != -1) {
+                    int tempcount = lisacontadora.get(indice).getCount() + 1;
                     lisacontadora.get(indice).setCount(tempcount);
-                }else{
+                } else {
                     lisacontadora.add(artistacont);
                 }
             }
         }
-        MyList<songcount> resultado = listaOrdenada(7,lisacontadora);
-        for (int p=0; p<resultado.size(); p++){
+        MyList<songcount> resultado = listaOrdenada(7, lisacontadora);
+        for (int p = 0; p < resultado.size(); p++) {
             Artista artista = (Artista) resultado.get(p).getValue();
-            System.out.println((p+1)+". "+ artista.getNombre());
+            System.out.println((p + 1) + ". " + artista.getNombre());
         }
     }
 
