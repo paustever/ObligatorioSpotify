@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public interface Consultas {
     public MyList<Cancion> Top10(String pais, LocalDate dia);
-    public MyList<Cancion> Top5 (LocalDate dia);
+    public void Top5 (LocalDate dia);
 
     public MyList<Artista> Top7Artistas(LocalDate fechaInicio, LocalDate fechaFin);
 

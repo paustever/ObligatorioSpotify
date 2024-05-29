@@ -157,6 +157,12 @@ public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
         return keys;
 
 }
+
+    @Override
+    public int Size() {
+        return size;
+    }
+
     private int hash(K key) {
         return (key.hashCode()) % capacity;
     }

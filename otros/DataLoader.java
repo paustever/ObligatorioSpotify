@@ -31,14 +31,14 @@ public class DataLoader {
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                MyList<String> datos = parsearLineaCSV(linea);
+                MyList<String> datos = split(linea, "\",\"");
                 String spotifyId = datos.get(0);
                 System.out.println(spotifyId);
                 String nombre = datos.get(1);
                 System.out.println(nombre);
                 String artistas = datos.get(2);
                 String[] artista = artistas.split(",");
-                MyList<Artista> listaDeArtistas = null;
+                MyList<Artista> listaDeArtistas = new LinkedList<>();
                 for (String esteArtista : artista) {
                     Artista artistaNuevo= null;
                     for (int i = 0 ; i<listadeArtistasGeneral.size(); i ++){
@@ -69,35 +69,33 @@ public class DataLoader {
                 MyHash<String, Cancion> songMap = countryMap.get(pais);
                 songMap.put(spotifyId, cancion);
             }
-
         } catch (IOException | IllegalArgumentException  e) {
             System.out.println("hubo algun problema");
         }
-
         return resultado;
     }
 
 
-    private static MyList<String> parsearLineaCSV(String linea) {
-        MyList<String> campos = new LinkedList<>();
-        StringBuilder campoActual = new StringBuilder();
-        boolean dentroDeComillas = false;
+    private static MyList<String> split(String cadena, String separador) {
+        MyList<String> lista = new LinkedList<>();
+        int indiceInicio = 0;
+        int indiceSeparador;
 
-        for (char c : linea.toCharArray()) {
-            if (c == '"') {
-                dentroDeComillas = !dentroDeComillas;
-            } else if (c == ',' && !dentroDeComillas) {
-                campos.add(campoActual.toString());
-                campoActual = new StringBuilder();
-            } else {
-                campoActual.append(c);
-            }
+        // Iterar mientras haya separadores en la cadena
+        while ((indiceSeparador = cadena.indexOf(separador, indiceInicio)) != -1) {
+            // Agregar la subcadena entre el índice de inicio y el índice del separador a la lista
+            lista.add(cadena.substring(indiceInicio, indiceSeparador));
+            // Actualizar el índice de inicio para comenzar la próxima búsqueda después del separador
+            indiceInicio = indiceSeparador + separador.length();
         }
-        campos.add(campoActual.toString());
 
-        return campos;
+        // Agregar la última parte de la cadena a la lista
+        lista.add(cadena.substring(indiceInicio));
+
+        return lista;
     }
 }
+
 
 
 

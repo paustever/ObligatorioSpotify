@@ -3,8 +3,10 @@ package otros;
 import TADS.LinkedList.src.MyList;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Cancion implements Comparable<Cancion> {
+    String spotifyId;
     MyList<Artista> listaDeArtistas;
     String nombreCancion;
     int dailyRank;
@@ -16,6 +18,7 @@ public class Cancion implements Comparable<Cancion> {
 
 
     public Cancion(String spotifyId, MyList<Artista> listaDeArtistas, String nombreCancion, int dailyRank, int dailyMovement, int weeklyMouvement, String pais, LocalDate snaphot_date, float tempo) {
+        this.spotifyId= spotifyId;
         this.listaDeArtistas = listaDeArtistas;
         this.nombreCancion = nombreCancion;
         this.dailyRank = dailyRank;
@@ -24,6 +27,28 @@ public class Cancion implements Comparable<Cancion> {
         this.pais = pais;
         this.snaphot_date = snaphot_date;
         this.tempo = tempo;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cancion cancion = (Cancion) o;
+        return Objects.equals(spotifyId, cancion.spotifyId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(spotifyId);
+    }
+
+    public String getSpotifyId() {
+        return spotifyId;
+    }
+
+    public void setSpotifyId(String spotifyId) {
+        this.spotifyId = spotifyId;
     }
 
     public int getDailyRank() {
@@ -90,4 +115,10 @@ public class Cancion implements Comparable<Cancion> {
         this.nombreCancion = nombreCancion;
     }
 
+
+    @Override
+    public int compareTo(Cancion o) {
+        return 0;
+    }
 }
+

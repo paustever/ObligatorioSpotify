@@ -8,5 +8,6 @@ public interface MyHash<K extends Comparable<K>,V> {
     boolean remove (K key) throws IllegalArgumentException;
     V get (K key);
     MyList<K>  keyset();
+    int Size();
 
 }

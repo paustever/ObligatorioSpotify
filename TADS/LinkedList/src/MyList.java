@@ -5,5 +5,6 @@ public interface MyList<T>{
     public void remove(int position);
     public T get(int position);
     public int size();
-    public int contains(T value);
+    public boolean contains(T value);
+    public int search (T value);
 }
