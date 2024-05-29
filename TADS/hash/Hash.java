@@ -1,6 +1,9 @@
 package TADS.hash;
 
 
+import TADS.LinkedList.src.LinkedList;
+import TADS.LinkedList.src.MyList;
+
 public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
     private int size;
     private int capacity;
@@ -14,6 +17,7 @@ public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
     public NodoHash<K, V>[] getTable() {
         return table;
     }
+
 
     public Hash() {
         this.capacity = 12689;
@@ -145,7 +149,14 @@ public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
             }
         }
     }
+    public MyList<K> keyset() {
+        MyList<K> keys = new LinkedList<>();
+        for (NodoHash<K,V> entry : this.getTable()) {
+            keys.add(entry.getKey());
+        }
+        return keys;
 
+}
     private int hash(K key) {
         return (key.hashCode()) % capacity;
     }

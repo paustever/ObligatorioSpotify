@@ -4,7 +4,7 @@ import TADS.LinkedList.src.MyList;
 
 import java.time.LocalDate;
 
-public class Cancion {
+public class Cancion implements Comparable<Cancion> {
     MyList<Artista> listaDeArtistas;
     String nombreCancion;
     int dailyRank;

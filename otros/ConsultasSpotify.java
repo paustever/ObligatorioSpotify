@@ -1,5 +1,6 @@
 package otros;
 
+import TADS.LinkedList.src.LinkedList;
 import TADS.hash.Hash;
 import TADS.hash.MyHash;
 import TADS.LinkedList.src.MyList;
@@ -59,9 +60,12 @@ public class ConsultasSpotify implements Consultas {
 
     @Override
     public MyList<Cancion> Top5(LocalDate dia) {
-        return null;
+        String ndia = String.valueOf(dia);
+        MyHash paises = miHash.get(ndia);
+        if (paises == null) {
+            return null;
+        }
     }
-
     @Override
     public MyList<Artista> Top7Artistas(LocalDate fechaInicio, LocalDate fechaFin) {
         return null;
@@ -69,11 +73,33 @@ public class ConsultasSpotify implements Consultas {
 
     @Override
     public int numeroArtistaTop(LocalDate fecha, Artista artista) {
-        return 0;
-    }
+        String ndia=String.valueOf(fecha);
+        Hash dia= (Hash) miHash.get(ndia);
+        MyList listagrande=new LinkedList();
+        for(Hash pais: dia.getTable()){
+
+
+        }}
+
+
+
+
 
     @Override
     public int CantidadCanciones(LocalDate fechaInicio, LocalDate fechaFin, float tempoMenor, float tempoMayor) {
         return 0;
+    }
+
+    public MyList<Cancion> Top50(String pais, LocalDate dia, MyList milista) {
+        String diaString = String.valueOf(dia);
+        if (miHash == null) {
+            return null;
+        } else if (miHash.contains(diaString)) {
+            Hash hashdia = (Hash) miHash.get(diaString);
+            for(int i=0; i<hashdia.getSize();i++){
+
+            }
+                for(int j=0; j<hashdia[i].get)
+            }
     }
 }

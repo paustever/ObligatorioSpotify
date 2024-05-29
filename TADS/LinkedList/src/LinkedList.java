@@ -73,17 +73,19 @@ public class LinkedList<T extends Comparable<T>> implements MyList<T> {
         return size;
     }
 
+
     @Override
-        public boolean contains(T value) {
-            boolean cont = false;
+        public int contains(T value) {
+            int indice=0;
             Node<T> temp = this.primero;
             while (temp != null && !temp.getValue().equals(value)) {
+                indice++;
                 temp = temp.getSiguiente();
             }
-            if (temp != null) { // Si no se llego al final de la lista, se encontro el valor
-                cont = true;
+            if (temp == null) { // Si no se llego al final de la lista, se encontro el valor
+                indice=-1;
             }
-            return cont;
+            return indice;
         }
     }
 
