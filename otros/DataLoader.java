@@ -6,6 +6,7 @@ import TADS.hash.IllegalArgumentException;
 import TADS.hash.MyHash;
 import TADS.LinkedList.src.MyList;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -30,12 +31,13 @@ public class DataLoader {
         MyHash<String, MyHash<String, MyHash<String, Cancion>>> resultado = new Hash<>();
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             String linea;
+            br.readLine();
+            int contador = 0;
             while ((linea = br.readLine()) != null) {
-                MyList<String> datos = split(linea, "\",\"");
-                String spotifyId = datos.get(0);
-                System.out.println(spotifyId);
+                contador++;
+               MyList<String> datos = split(linea,"\",\"");
+                String spotifyId = datos.get(0).replace("\"", "");
                 String nombre = datos.get(1);
-                System.out.println(nombre);
                 String artistas = datos.get(2);
                 String[] artista = artistas.split(",");
                 MyList<Artista> listaDeArtistas = new LinkedList<>();
@@ -54,6 +56,9 @@ public class DataLoader {
                 int dailyMovement = Integer.parseInt(datos.get(4));
                 int weeklyMovement = Integer.parseInt(datos.get(5));
                 String pais = datos.get(6);
+                if (pais ==""){
+                    pais = "global";
+                }
                 LocalDate snapshotDate= LocalDate.parse(datos.get(7));
                 float tempo = Float.parseFloat(datos.get(23));
                 Cancion cancion = new Cancion(spotifyId, listaDeArtistas, nombre,dailyRank,dailyMovement,weeklyMovement, pais,snapshotDate,tempo);
@@ -71,7 +76,7 @@ public class DataLoader {
             }
         } catch (IOException | IllegalArgumentException  e) {
             System.out.println("hubo algun problema");
-        }
+        };
         return resultado;
     }
 
@@ -95,7 +100,5 @@ public class DataLoader {
         return lista;
     }
 }
-
-
 
 

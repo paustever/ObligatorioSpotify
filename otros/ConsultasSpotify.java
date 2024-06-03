@@ -7,10 +7,9 @@ import TADS.LinkedList.src.MyList;
 import TADS.Tree.BinarySearchTree;
 import TADS.Tree.MyBinarySearchTree;
 
-import javax.xml.crypto.dsig.CanonicalizationMethod;
 import java.time.LocalDate;
 
-public class ConsultasSpotify implements Consultas {
+public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
     MyHash<String, MyHash<String, MyHash<String, Cancion>>> miHash;
 
     public ConsultasSpotify(MyHash datos) {
@@ -65,14 +64,14 @@ public class ConsultasSpotify implements Consultas {
         String ndia = String.valueOf(dia);
         MyHash paises = miHash.get(ndia);
         MyList<Cancion> milista = new LinkedList<>();
-        MyList<songcount> listacontadora = new LinkedList<songcount>();
+        MyList<Count<V>> listacontadora = new LinkedList<>();
 
         if (paises == null) {
             System.out.println("no hay Top 5 de canciones para este dia");
         }
         milista = Top50(dia, milista);
         for (int i = 0; i < milista.size(); i++) {
-            songcount cancionCont = new songcount(milista.get(i), 1);
+            Count cancionCont = new Count(milista.get(i), 1);
             int miIndice = listacontadora.search(cancionCont);
             if (miIndice != -1) {
                 int tempcount = listacontadora.get(miIndice).getCount() + 1;
@@ -81,7 +80,7 @@ public class ConsultasSpotify implements Consultas {
                 listacontadora.add(cancionCont);
             }
         }
-        MyList<songcount> resultado = listaOrdenada(5, listacontadora);
+        MyList<Count<V>> resultado = listaOrdenada(5, listacontadora);
         for (int i = 0; i < resultado.size(); i++) {
             Cancion cancion = (Cancion) resultado.get(i).getValue();
             System.out.println((i + 1) + "." + cancion.getNombreCancion() + cancion.getListaDeArtistas());
@@ -93,7 +92,7 @@ public class ConsultasSpotify implements Consultas {
     public void  Top7Artistas(LocalDate fechaInicio, LocalDate fechaFin) {
         MyList<Cancion> milista = new LinkedList();
         MyList<Cancion> milista1 = new LinkedList<>();
-        MyList<songcount> lisacontadora = new LinkedList<>();
+        MyList<Count<V>> lisacontadora = new LinkedList<>();
         for (LocalDate date = fechaInicio; !date.isAfter(fechaFin); date = date.plusDays(1)) {
             milista1 = Top50(date, milista1);
         }
@@ -105,7 +104,7 @@ public class ConsultasSpotify implements Consultas {
         for (int i = 0; i < milista.size(); i++) {
             MyList<Artista> artistasi = milista.get(i).listaDeArtistas;
             for (int j = 0; j < artistasi.size(); j++) {
-                songcount artistacont = new songcount<>(artistasi.get(j), 1);
+                Count artistacont = new Count<>(artistasi.get(j), 1);
                 int indice = lisacontadora.search(artistacont);
                 if (indice != -1) {
                     int tempcount = lisacontadora.get(indice).getCount() + 1;
@@ -115,7 +114,7 @@ public class ConsultasSpotify implements Consultas {
                 }
             }
         }
-        MyList<songcount> resultado = listaOrdenada(7, lisacontadora);
+        MyList<Count<V>> resultado = listaOrdenada(7, lisacontadora);
         for (int p = 0; p < resultado.size(); p++) {
             Artista artista = (Artista) resultado.get(p).getValue();
             System.out.println((p + 1) + ". " + artista.getNombre());
@@ -164,11 +163,11 @@ public class ConsultasSpotify implements Consultas {
         return milista;
     }
 
-    public MyList<songcount> listaOrdenada (int top, MyList<songcount> milista){
+    public MyList<Count<V>> listaOrdenada (int top, MyList<Count<V>> milista){
         MyList resultado = new LinkedList();
         int indice= 0 ;
         while (resultado.size()<=top) {
-            songcount temp = milista.get(0);
+            Count temp = milista.get(0);
             for (int i = 0; i < milista.size(); i++) {
                 if (temp.compareTo(milista.get(i+1)) >=0){
                     temp= milista.get(i+1);

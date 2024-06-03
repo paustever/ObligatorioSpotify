@@ -43,25 +43,20 @@ public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
 
     @Override
     public boolean contains(K key) {
-        if (key == null) {
+        if (key == null || capacity == 0) {
             return false;
         }
-        int contador = capacity;
-        int index = hash(key);
-        while (contador != 0) {
-            if (table[index] != null) {
-                if (table[index].key.equals(key)) {
-                    return true;
-                }
-            }
-            index++;
-            contador--;
-            if (index > capacity-1) {
-                index = 0;
-            }
 
-        }
-        return false;
+        int index = Math.abs(hash(key)) % capacity; // Calcula el índice usando el módulo de la capacidad
+        int initialIndex = index;
+        do {
+            if (table[index] != null && table[index].key.equals(key)) {
+                return true; // La clave se encontró en esta posición
+            }
+            index = (index + 1) % capacity; // Avanza al siguiente índice circularmente
+        } while (index != initialIndex && table[index] != null); // Salir del bucle si se vuelve al índice inicial o se alcanza un espacio nulo
+
+        return false; // La clave no se encontró en la tabla
     }
 
     @Override
@@ -72,7 +67,7 @@ public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
         if (size >= capacity * loadfactor) {
             resize();
         }
-        int index = hash((K) key);
+        int index = Math.abs(hash((K) key));
         while (table[index] != null) {
             if (table[index].key.equals(key)) {
                 throw new IllegalArgumentException();
@@ -120,7 +115,7 @@ public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
             return null;
         }
         int contador = capacity;
-        int index = hash(key);
+        int index = Math.abs(hash(key));
         while (contador != 0) {
             if (table[index] != null) {
                 if (table[index].key.equals(key)) {

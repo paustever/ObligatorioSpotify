@@ -1,5 +1,6 @@
 package otros;
 
+import TADS.hash.Hash;
 import TADS.hash.MyHash;
 import TADS.LinkedList.src.MyList;
 import java.time.LocalDate;
@@ -9,7 +10,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         DataLoader dataLoader = new DataLoader();
-        String archivoCSV = "/Users/paula/Desktop/SpotifyData.csv";
+        System.out.println("ponga la direccion donde tiene guardado el archivo q quiere subir");
+        String archivoCSV = "C:\\Users\\tassa\\Documents\\ObligatorioSpotify\\SpotifyData.csv";
         boolean seguir = true;
         MyHash datos = null;
         boolean continuar = true;
@@ -21,8 +23,9 @@ public class Main {
             int opcion1 = scanner.nextInt();
             switch (opcion1) {
                 case 1:
-                    System.out.println("La carga de datos se realizo con exito ");
                     datos = dataLoader.cargarDatosEnHashMap(archivoCSV);
+                    System.out.println("La carga de datos se realizo con exito ");
+                    System.out.println(datos);
                     break;
                 case 2:
                     while (seguir) {
@@ -39,6 +42,7 @@ public class Main {
                             case 1:
                                 System.out.println("Ingrese el país:");
                                 String pais = scanner.nextLine();
+                                pais = scanner.nextLine();
                                 System.out.println("Ingrese la fecha (YYYY-MM-DD):");
                                 LocalDate fecha = LocalDate.parse(scanner.nextLine());
                                 consultas.Top10(pais,fecha);
@@ -99,7 +103,5 @@ public class Main {
             }
         }
     }
-
-    //hola
 }
 

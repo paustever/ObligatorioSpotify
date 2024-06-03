@@ -2,10 +2,10 @@ package otros;
 
 import java.util.Objects;
 
-public class songcount <V> implements Comparable<songcount> {
+public class Count<V extends Comparable<V>> implements Comparable<Count<V>> {
         V value;
         int count;
-        public songcount(V value , int count) {
+        public Count(V value , int count) {
             this.value = value;
             this.count = count;
         }
@@ -31,7 +31,7 @@ public class songcount <V> implements Comparable<songcount> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        songcount songcount = (songcount) o;
+        Count songcount = (Count) o;
         return Objects.equals(value, songcount.value);
     }
 
@@ -41,7 +41,7 @@ public class songcount <V> implements Comparable<songcount> {
     }
 
     @Override
-    public int compareTo(songcount o) {
+    public int compareTo(Count o) {
         if (this.getCount()> o.getCount()){
             return 1;
         }else if (this.getCount()<o.getCount()){
