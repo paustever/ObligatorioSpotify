@@ -7,4 +7,5 @@ public interface MyList<T>{
     public int size();
     public boolean contains(T value);
     public int search (T value);
+    public void AddInOrder(T value);
 }

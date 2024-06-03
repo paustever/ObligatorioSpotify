@@ -20,7 +20,7 @@ public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
 
 
     public Hash() {
-        this.capacity = 12689;
+        this.capacity = 3000;
         this.table = new NodoHash[capacity];
         this.size = 0;
     }

@@ -47,6 +47,9 @@ public class DataLoader {
                         if ( listaDeArtistas.get(i).getNombre().equals(esteArtista)){
                             artistaNuevo= listaDeArtistas.get(i);
                             listaDeArtistas.add(artistaNuevo);
+                            if(!listadeArtistasGeneral.contains(artistaNuevo)){
+                                listadeArtistasGeneral.add(artistaNuevo);
+                            }
                         }
                     }
                     artistaNuevo = new Artista(esteArtista);

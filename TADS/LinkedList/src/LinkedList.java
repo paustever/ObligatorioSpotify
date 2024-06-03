@@ -99,5 +99,24 @@ public class LinkedList<T extends Comparable<T>> implements MyList<T> {
         }
         return indice;
     }
+
+    public void AddInOrder(T value) {
+        Node<T> newNode = new Node<>(value);
+        if (primero == null || value.compareTo(primero.getValue()) < 0) {
+            newNode.setSiguiente((Node<T>) primero);
+            setPrimero(newNode);
+            return;
+        }
+        Node<T> temp = this.getPrimero();
+        while (temp.getSiguiente() != null && value.compareTo((T) temp.getSiguiente().getValue()) > 0) {
+            temp = (Node<T>) temp.getSiguiente();
+        }
+        if (temp.getSiguiente() == null && value.compareTo((T) temp.getValue()) > 0) {
+            temp.setSiguiente(newNode);
+        } else {
+            newNode.setSiguiente(temp.getSiguiente());
+            temp.setSiguiente(newNode);
+        }
+    }
     }
 

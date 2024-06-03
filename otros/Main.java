@@ -11,7 +11,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         DataLoader dataLoader = new DataLoader();
         System.out.println("ponga la direccion donde tiene guardado el archivo q quiere subir");
-        String archivoCSV = "C:\\Users\\tassa\\Documents\\ObligatorioSpotify\\SpotifyData.csv";
+        String archivoCSV = "C:\\Users\\paula\\Desktop\\Obligatorio\\universal_top_spotify_songs.csv";
         boolean seguir = true;
         MyHash datos = null;
         boolean continuar = true;
@@ -49,11 +49,13 @@ public class Main {
                                 break;
                             case 2:
                                 System.out.println("Ingrese la fecha (YYYY-MM-DD):");
+                                String dia = scanner.nextLine();
                                 LocalDate fecha2 = LocalDate.parse(scanner.nextLine());
                                 consultas.Top5(fecha2);
                                 break;
                             case 3:
                                 System.out.println("Ingrese la fecha de inicio (YYYY-MM-DD):");
+                                String dia2 = scanner.nextLine();
                                 LocalDate fechaInicio = LocalDate.parse(scanner.nextLine());
                                 System.out.println("Ingrese la fecha de fin (YYYY-MM-DD):");
                                 LocalDate fechaFin = LocalDate.parse(scanner.nextLine());
@@ -61,20 +63,17 @@ public class Main {
                                 break;
                             case 4:
                                 System.out.println("Ingrese la fecha (YYYY-MM-DD):");
+                                String dia3 = scanner.nextLine();
                                 LocalDate fecha3 = LocalDate.parse(scanner.nextLine());
                                 System.out.println("Ingrese el nombre del artista");
                                 String nombreArtista = scanner.nextLine();
                                 MyList<Artista> listaArtistas = dataLoader.getListadeArtistasGeneral();
-                                Artista artista= null;
-                                for (int i =0; i < listaArtistas.size(); i ++){
-                                    if (listaArtistas.get(i).getNombre()== nombreArtista){
-                                        artista= listaArtistas.get(i);
-                                    }
-                                }
+                                Artista artista=new Artista(nombreArtista);
                                 consultas.numeroArtistaTop(fecha3, artista);
                                 break;
                             case 5:
                                 System.out.println("Ingrese la fecha de inicio  (YYYY-MM-DD):");
+                                String dia4 = scanner.nextLine();
                                 LocalDate fechaInicio1 = LocalDate.parse(scanner.nextLine());
                                 System.out.println("Ingrese la fecha de fin (YYYY-MM-DD):");
                                 LocalDate fechaFin1 = LocalDate.parse(scanner.nextLine());

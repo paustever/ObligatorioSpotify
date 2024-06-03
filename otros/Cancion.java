@@ -115,10 +115,31 @@ public class Cancion implements Comparable<Cancion> {
         this.nombreCancion = nombreCancion;
     }
 
+    @Override
+    public String toString() {
+        return "Cancion{" +
+                "spotifyId='" + spotifyId + '\'' +
+                ", listaDeArtistas=" + listaDeArtistas +
+                ", nombreCancion='" + nombreCancion + '\'' +
+                ", dailyRank=" + dailyRank +
+                ", dailyMovement=" + dailyMovement +
+                ", weeklyMouvement=" + weeklyMouvement +
+                ", pais='" + pais + '\'' +
+                ", snaphot_date=" + snaphot_date +
+                ", tempo=" + tempo +
+                '}';
+    }
 
     @Override
     public int compareTo(Cancion o) {
-        return 0;
+            if (this.getDailyRank()> o.getDailyRank()){
+                return 1;
+            }else if (this.getDailyRank()<o.getDailyRank()){
+                return -1;
+            }else {
+                return 0;
+            }
+        }
     }
-}
+
 
