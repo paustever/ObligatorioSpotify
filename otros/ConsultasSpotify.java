@@ -4,8 +4,7 @@ import TADS.LinkedList.src.LinkedList;
 import TADS.hash.Hash;
 import TADS.hash.MyHash;
 import TADS.LinkedList.src.MyList;
-import TADS.Tree.BinarySearchTree;
-import TADS.Tree.MyBinarySearchTree;
+
 
 import java.time.LocalDate;
 
@@ -92,8 +91,14 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
         MyList<Cancion> milista = new LinkedList();
         MyList<Cancion> milista1 = new LinkedList<>();
         MyList<Count<V>> lisacontadora = new LinkedList<>();
+        int contador=0;
         for (LocalDate date = fechaInicio; !date.isAfter(fechaFin); date = date.plusDays(1)) {
             milista1 = Top50(date, milista1);
+            contador++;
+        }
+        if(milista1.size()==0){
+            System.out.println("No hay datos para esta fecha");
+            return;
         }
         for (int f = 0; f < milista1.size(); f++) {
             if (!milista.contains(milista1.get(f))) {

@@ -75,16 +75,16 @@ public class LinkedList<T extends Comparable<T>> implements MyList<T> {
 
 
     @Override
-        public boolean contains(T value) {
-            Node<T> temp = this.primero;
-            while (temp != null && !temp.getValue().equals(value)) {
-                temp = temp.getSiguiente();
-            }
-            if (temp == null) { // Si no se llego al final de la lista, se encontro el valor
-               return false;
-            }
-            return true;
+    public boolean contains(T value) {
+        Node<T> temp = this.primero;
+        while (temp != null && !temp.getValue().equals(value)) {
+            temp = temp.getSiguiente();
         }
+        if (temp == null) { // Si no se llego al final de la lista, se encontro el valor
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public int search(T value) {
@@ -102,21 +102,24 @@ public class LinkedList<T extends Comparable<T>> implements MyList<T> {
 
     public void AddInOrder(T value) {
         Node<T> newNode = new Node<>(value);
+
+        // Si la lista está vacía o el valor a insertar es menor que el primer valor
         if (primero == null || value.compareTo(primero.getValue()) < 0) {
-            newNode.setSiguiente((Node<T>) primero);
+            newNode.setSiguiente(primero);
             setPrimero(newNode);
             return;
         }
-        Node<T> temp = this.getPrimero();
-        while (temp.getSiguiente() != null && value.compareTo((T) temp.getSiguiente().getValue()) > 0) {
-            temp = (Node<T>) temp.getSiguiente();
+
+        Node<T> temp = primero;
+
+        // Recorre la lista hasta encontrar la posición correcta para insertar
+        while (temp.getSiguiente() != null && value.compareTo(temp.getSiguiente().getValue()) > 0) {
+            temp = temp.getSiguiente();
         }
-        if (temp.getSiguiente() == null && value.compareTo((T) temp.getValue()) > 0) {
-            temp.setSiguiente(newNode);
-        } else {
-            newNode.setSiguiente(temp.getSiguiente());
-            temp.setSiguiente(newNode);
-        }
+
+        // Inserta el nuevo nodo en la posición encontrada
+        newNode.setSiguiente(temp.getSiguiente());
+        temp.setSiguiente(newNode);
     }
-    }
+}
 
