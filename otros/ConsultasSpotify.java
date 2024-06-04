@@ -67,6 +67,7 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
 
         if (paises == null) {
             System.out.println("no hay Top 5 de canciones para este dia");
+            return;
         }
         milista = Top50(dia, milista);
         for (int i = 0; i < milista.size(); i++) {
@@ -104,8 +105,7 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
             if (!milista.contains(milista1.get(f))) {
                 milista.add(milista1.get(f));
             }
-        }
-        for (int i = 0; i < milista.size(); i++) {
+        }for (int i = 0; i < milista.size(); i++) {
             MyList<Artista> artistasi = milista.get(i).listaDeArtistas;
             for (int j = 0; j < artistasi.size(); j++) {
                 Count artistacont = new Count<>(artistasi.get(j), 1);
