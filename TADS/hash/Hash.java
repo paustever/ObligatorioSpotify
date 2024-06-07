@@ -4,7 +4,7 @@ package TADS.hash;
 import TADS.LinkedList.src.LinkedList;
 import TADS.LinkedList.src.MyList;
 
-public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
+public class Hash <K extends Comparable<K>, V> implements MyHash<K, V>, Comparable<Hash> {
     private int size;
     private int capacity;
     private NodoHash<K, V>[] table;
@@ -162,5 +162,9 @@ public class Hash <K extends Comparable<K>, V>  implements MyHash <K,V> {
         return (key.hashCode()) % capacity;
     }
 
+    @Override
+    public int compareTo(Hash o) {
+        return 0;
+    }
 }
 

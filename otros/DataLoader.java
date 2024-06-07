@@ -27,8 +27,10 @@ public class DataLoader {
         this.listadeArtistasGeneral = listadeArtistasGeneral;
     }
 
-    public MyHash<String, MyHash<String,  MyHash<String, Cancion>>> cargarDatosEnHashMap(String archivoCSV) {
-        MyHash<String, MyHash<String, MyHash<String, Cancion>>> resultado = new Hash<>();
+    public MyList<Hash> cargarDatosEnHashMap(String archivoCSV) {
+        MyList listadehashes= new LinkedList<>();
+        MyHash<String, MyHash<String, MyHash<Integer, Cancion>>> resultado1 = new Hash<>();
+        MyHash<String, MyHash<String,Count<Cancion>>> resultado2=new Hash<>();
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             String linea;
             br.readLine();
@@ -65,22 +67,37 @@ public class DataLoader {
                 LocalDate snapshotDate= LocalDate.parse(datos.get(7));
                 float tempo = Float.parseFloat(datos.get(23));
                 Cancion cancion = new Cancion(spotifyId, listaDeArtistas, nombre,dailyRank,dailyMovement,weeklyMovement, pais,snapshotDate,tempo);
+                Count<Cancion> songcount =new Count(cancion,1);
                 String dia = String.valueOf(snapshotDate);
-                if (!resultado.contains(dia)) {
-                    resultado.put(dia, new Hash<>());
+                if (!resultado1.contains(dia)) {
+                    resultado1.put(dia, new Hash<>());
                 }
-                MyHash<String, MyHash<String, Cancion>> countryMap = resultado.get(dia);
+                MyHash<String, MyHash<Integer, Cancion>> countryMap = resultado1.get(dia);
 
                 if (!countryMap.contains(pais)) {
                     countryMap.put(pais, new Hash<>());
                 }
-                MyHash<String, Cancion> songMap = countryMap.get(pais);
-                songMap.put(spotifyId, cancion);
+                MyHash<Integer, Cancion> songMap = countryMap.get(pais);
+                songMap.put(dailyRank, cancion);
+
+                if(!resultado2.contains(dia)){
+                    resultado2.put(dia,new Hash<>());
+                }
+                if(!resultado2.get(dia).contains((songcount.getValue().getSpotifyId()))){
+                    resultado2.get(dia).put(spotifyId,songcount);
+                }else{
+                    Count micount= (Count) resultado2.get(spotifyId);
+                    int valor=micount.getCount()+1;
+                    micount.setCount(valor);
+                }
             }
         } catch (IOException | IllegalArgumentException  e) {
             System.out.println("hubo algun problema");
-        };
-        return resultado;
+        }
+        listadehashes.add((Hash) resultado1);
+        listadehashes.add((Hash) resultado2);
+
+        return listadehashes;
     }
 
 

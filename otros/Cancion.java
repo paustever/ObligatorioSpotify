@@ -130,6 +130,15 @@ public class Cancion implements Comparable<Cancion> {
                 '}';
     }
 
+    public StringBuilder imprimirlista(){
+        StringBuilder varibale=null;
+        for (int i=0; i<listaDeArtistas.size();i++){
+            varibale=varibale.append(" " + listaDeArtistas.get(i).getNombre());
+        }
+        return varibale;
+
+    }
+
     @Override
     public int compareTo(Cancion o) {
             if (this.getDailyRank()> o.getDailyRank()){
