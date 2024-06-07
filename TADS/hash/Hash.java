@@ -70,6 +70,7 @@ public class Hash <K extends Comparable<K>, V> implements MyHash<K, V>, Comparab
         int index = Math.abs(hash((K) key));
         while (table[index] != null) {
             if (table[index].key.equals(key)) {
+                System.out.println("salto aca"+ table[index].value.toString());
                 throw new IllegalArgumentException();
             }
             index = (index + 1);

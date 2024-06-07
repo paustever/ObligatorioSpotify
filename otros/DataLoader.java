@@ -15,7 +15,7 @@ import java.time.LocalDate;
 
 public class DataLoader {
     MyList< Artista> listadeArtistasGeneral;
-    public DataLoader() {
+    public DataLoader() throws FileNotFoundException {
         this.listadeArtistasGeneral = new TADS.LinkedList.src.LinkedList<>();
     }
 
@@ -37,6 +37,7 @@ public class DataLoader {
             int contador = 0;
             while ((linea = br.readLine()) != null) {
                 contador++;
+                System.out.println(contador);
                MyList<String> datos = split(linea,"\",\"");
                 String spotifyId = datos.get(0).replace("\"", "");
                 String nombre = datos.get(1);
@@ -66,7 +67,7 @@ public class DataLoader {
                 }
                 LocalDate snapshotDate= LocalDate.parse(datos.get(7));
                 float tempo = Float.parseFloat(datos.get(23));
-                Cancion cancion = new Cancion(spotifyId, listaDeArtistas, nombre,dailyRank,dailyMovement,weeklyMovement, pais,snapshotDate,tempo);
+                Cancion cancion = new Cancion(spotifyId, listaDeArtistas, nombre,dailyRank,dailyMovement,weeklyMovement, pais,snapshotDate,tempo, contador);
                 Count<Cancion> songcount =new Count(cancion,1);
                 String dia = String.valueOf(snapshotDate);
                 if (!resultado1.contains(dia)) {
@@ -86,13 +87,15 @@ public class DataLoader {
                 if(!resultado2.get(dia).contains((songcount.getValue().getSpotifyId()))){
                     resultado2.get(dia).put(spotifyId,songcount);
                 }else{
-                    Count micount= (Count) resultado2.get(spotifyId);
-                    int valor=micount.getCount()+1;
+                    Count micount= (Count) resultado2.get(dia).get(spotifyId);
+                    int valor=micount.getCount();
                     micount.setCount(valor);
                 }
             }
-        } catch (IOException | IllegalArgumentException  e) {
+        } catch (IOException e) {
             System.out.println("hubo algun problema");
+        } catch (IllegalArgumentException  e){
+            System.out.println("hubo otro problema");
         }
         listadehashes.add((Hash) resultado1);
         listadehashes.add((Hash) resultado2);
@@ -119,6 +122,8 @@ public class DataLoader {
 
         return lista;
     }
+
+
 }
 
 

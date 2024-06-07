@@ -3,15 +3,17 @@ package otros;
 import TADS.hash.Hash;
 import TADS.hash.MyHash;
 import TADS.LinkedList.src.MyList;
+
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
         DataLoader dataLoader = new DataLoader();
         System.out.println("ponga la direccion donde tiene guardado el archivo q quiere subir");
-        String archivoCSV = "C:\\Users\\paula\\Desktop\\Obligatorio\\universal_top_spotify_songs.csv";
+        String archivoCSV = "C:\\Users\\tassa\\Documents\\ObligatorioSpotify\\SpotifyData.csv";
         boolean seguir = true;
         MyList<Hash>datos = null;
         boolean continuar = true;

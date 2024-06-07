@@ -43,17 +43,18 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
         String ndia = String.valueOf(dia);
         Hash<String,Count<Cancion>> mihash = (Hash) hashcount.get(ndia);
         MyList<Count<Cancion>> milista = new LinkedList();
-        for (int i = 0; i < mihash.getCapacity(); i++) {
-            if (mihash.getTable()[i] != null && mihash.getTable()[i].getValue().getValue().dailyRank<51) {
-                Count micount = (Count) mihash.getTable()[i].getValue();
-                milista.AddInOrder(micount);
+        if (mihash!=null) {
+            for (int i = 0; i < mihash.getCapacity(); i++) {
+                if (mihash.getTable()[i] != null && mihash.getTable()[i].getValue().getValue().dailyRank < 51) {
+                    Count micount = (Count) mihash.getTable()[i].getValue();
+                    milista.AddInOrder(micount);
+                }
+            }
+            for (int k = milista.size() - 1; k > milista.size() - 6; k--) {
+                Cancion cancion = milista.get(k).getValue();
+                System.out.println(cancion.getNombreCancion());
             }
         }
-        for (int k = milista.size() - 1; k > milista.size() - 6; k--) {
-            Cancion cancion = milista.get(k).getValue();
-            System.out.println(cancion.getNombreCancion());
-        }
-
     }
 
 
@@ -70,7 +71,7 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
         }
         for (int p = listaordenada.size() - 1; p > listaordenada.size() - 8; p--) {
             Artista artista = (Artista) listaordenada.get(p).getValue();
-            System.out.println(artista.getNombre());
+            System.out.println(p + artista.getNombre());
         }
     }
 
@@ -78,11 +79,13 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
     public void numeroArtistaTop(LocalDate fecha, Artista artista) {
         int cantidad=0;
         Hash dia= (Hash) hashcount.get(String.valueOf(fecha));
-        for(int i=0; i<dia.getSize(); i++){
-            if(dia.getTable()[i]!=null){
-                Count<Cancion> tempcancion= (Count) dia.getTable()[i].getValue();
-                if(tempcancion.getValue().getListaDeArtistas().contains(artista) && tempcancion.getValue().dailyRank<51){
-                    cantidad+=tempcancion.getCount();
+        if (dia!=null) {
+            for (int i = 0; i < dia.getSize(); i++) {
+                if (dia.getTable()[i] != null) {
+                    Count<Cancion> tempcancion = (Count) dia.getTable()[i].getValue();
+                    if (tempcancion.getValue().getListaDeArtistas().contains(artista) && tempcancion.getValue().dailyRank < 51) {
+                        cantidad += tempcancion.getCount();
+                    }
                 }
             }
         }
@@ -101,23 +104,25 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
 
     public MyList artistasdia(LocalDate date, MyList<Count<Artista>> listacontadora) {
         Hash<String, Count> hashtemp = (Hash<String, Count>) hashcount.get(String.valueOf(date));
-        for (int i = 0; i < hashtemp.getCapacity(); i++) {
-            if (hashtemp.getTable()[i] != null) {
-                Cancion tempcancion = (Cancion) hashtemp.getTable()[i].getValue().getValue();
-                if (tempcancion.getDailyRank() < 51) {
-                    for (int j = 0; j < tempcancion.getListaDeArtistas().size(); j++) {
-                        Count<Artista> tempartista = new Count<>(tempcancion.getListaDeArtistas().get(j), 1);
-                        int posicion = listacontadora.search(tempartista);
-                        if (posicion != -1) {
-                            listacontadora.add(tempartista);
-                        } else {
-                            int valor = listacontadora.get(posicion).getCount() + 1;
-                            listacontadora.get(posicion).setCount(valor);
+        if (hashtemp!= null) {
+            for (int i = 0; i < hashtemp.getCapacity(); i++) {
+                if (hashtemp.getTable()[i] != null) {
+                    Cancion tempcancion = (Cancion) hashtemp.getTable()[i].getValue().getValue();
+                    if (tempcancion.getDailyRank() < 51) {
+                        for (int j = 0; j < tempcancion.getListaDeArtistas().size(); j++) {
+                            Count<Artista> tempartista = new Count<>(tempcancion.getListaDeArtistas().get(j), 1);
+                            int posicion = listacontadora.search(tempartista);
+                            if (posicion == -1) {
+                                listacontadora.add(tempartista);
+                            } else {
+                                int valor = listacontadora.get(posicion).getCount() + 1;
+                                listacontadora.get(posicion).setCount(valor);
+                            }
                         }
                     }
                 }
             }
-        }return listacontadora;
+        } return listacontadora;
     }
 
 
