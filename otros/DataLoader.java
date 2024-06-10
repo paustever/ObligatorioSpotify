@@ -79,7 +79,16 @@ public class DataLoader {
                     countryMap.put(pais, new Hash<>());
                 }
                 MyHash<Integer, Cancion> songMap = countryMap.get(pais);
-                songMap.put(dailyRank, cancion);
+                boolean continuar = false;
+                while (!continuar){
+                    try {
+                        songMap.put(dailyRank, cancion);
+                        continuar= true;
+                    }catch(IllegalArgumentException e){
+                        dailyRank++;
+                    }
+                }
+
 
                 if(!resultado2.contains(dia)){
                     resultado2.put(dia,new Hash<>());

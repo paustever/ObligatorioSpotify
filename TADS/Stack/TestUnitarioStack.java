@@ -38,7 +38,5 @@ import TADS.LinkedList.src.MyList;
                 i++;
             }
             assertEquals(i,0);
-
-
         }
 }
