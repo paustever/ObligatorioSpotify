@@ -50,9 +50,12 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
                     milista.AddInOrder(micount);
                 }
             }
+            int i =1;
             for (int k = milista.size() - 1; k > milista.size() - 6; k--) {
                 Cancion cancion = milista.get(k).getValue();
-                System.out.println(cancion.getNombreCancion());
+                int ocurrencias = milista.get(k).getCount();
+                System.out.println(i+ "- " + cancion.getNombreCancion() + " ocurrencias: "+ ocurrencias);
+                i++;
             }
         }
     }
@@ -69,10 +72,11 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
         for(int k=0; k<listacontadora.size();k++){
             listaordenada.AddInOrder(listacontadora.get(k));
         }
-        for (int p = listaordenada.size() - 1; p > listaordenada.size() - 8; p--) {
+        int i =1;
+        for (int p = listaordenada.size() - 1; p >listaordenada.size() - 8; p--) {
             Artista artista = (Artista) listaordenada.get(p).getValue();
-            int i =1;
-            System.out.println(i + "-" + "" + artista.getNombre());
+            int Ocurrencias = listaordenada.get(p).getCount();
+            System.out.println(i + "-" + "" + artista.getNombre()+ Ocurrencias);
             i++;
         }
     }
@@ -110,6 +114,7 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
             for (int i = 0; i < hashtemp.getCapacity(); i++) {
                 if (hashtemp.getTable()[i] != null) {
                     Cancion tempcancion = (Cancion) hashtemp.getTable()[i].getValue().getValue();
+                    int count = hashtemp.getTable()[i].getValue().getCount();
                     if (tempcancion.getDailyRank() < 51) {
                         for (int j = 0; j < tempcancion.getListaDeArtistas().size(); j++) {
                             Count<Artista> tempartista = new Count<>(tempcancion.getListaDeArtistas().get(j), 1);
@@ -117,7 +122,7 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
                             if (posicion == -1) {
                                 listacontadora.add(tempartista);
                             } else {
-                                int valor = listacontadora.get(posicion).getCount() + 1;
+                                int valor = listacontadora.get(posicion).getCount() + count;
                                 listacontadora.get(posicion).setCount(valor);
                             }
                         }

@@ -1,6 +1,7 @@
 package otros;
 
 import TADS.hash.Hash;
+import TADS.hash.IllegalArgumentException;
 import TADS.hash.MyHash;
 import TADS.LinkedList.src.MyList;
 
@@ -9,7 +10,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, IllegalArgumentException {
         Scanner scanner = new Scanner(System.in);
         DataLoader dataLoader = new DataLoader();
         System.out.println("ponga la direccion donde tiene guardado el archivo q quiere subir");

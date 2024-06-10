@@ -14,20 +14,20 @@ import java.time.LocalDate;
 
 
 public class DataLoader {
-    MyList< Artista> listadeArtistasGeneral;
+    MyHash<String,  Artista> listadeArtistasGeneral;
     public DataLoader() throws FileNotFoundException {
-        this.listadeArtistasGeneral = new TADS.LinkedList.src.LinkedList<>();
+        this.listadeArtistasGeneral = new Hash<>();
     }
 
-    public MyList<Artista> getListadeArtistasGeneral() {
+    public MyHash getListadeArtistasGeneral() {
         return listadeArtistasGeneral;
     }
 
-    public void setListadeArtistasGeneral(MyList<Artista> listadeArtistasGeneral) {
+    public void setListadeArtistasGeneral(MyHash listadeArtistasGeneral) {
         this.listadeArtistasGeneral = listadeArtistasGeneral;
     }
 
-    public MyList<Hash> cargarDatosEnHashMap(String archivoCSV) {
+    public MyList<Hash> cargarDatosEnHashMap(String archivoCSV) throws IllegalArgumentException {
         MyList listadehashes= new LinkedList<>();
         MyHash<String, MyHash<String, MyHash<Integer, Cancion>>> resultado1 = new Hash<>();
         MyHash<String, MyHash<String,Count<Cancion>>> resultado2=new Hash<>();
@@ -40,21 +40,19 @@ public class DataLoader {
                 String nombre = datos.get(1);
                 String artistas = datos.get(2);
                 String[] artista = artistas.split(",");
+                for (String aritistatemp: artista){
+                    aritistatemp.replace(" ", "");
+                }
                 MyList<Artista> listaDeArtistas = new LinkedList<>();
                 for (String esteArtista : artista) {
-                    Artista artistaNuevo= null;
-                    for (int i = 0 ; i<listadeArtistasGeneral.size(); i ++){
-                        if ( listaDeArtistas.get(i).getNombre().equals(esteArtista)){
-                            artistaNuevo= listaDeArtistas.get(i);
-                            listaDeArtistas.add(artistaNuevo);
-                            if(!listadeArtistasGeneral.contains(artistaNuevo)){
-                                listadeArtistasGeneral.add(artistaNuevo);
-                            }
-                        }
+                    esteArtista= esteArtista.trim();
+                    if(!listadeArtistasGeneral.contains(esteArtista)){
+                        Artista artistaNuevo= new Artista(esteArtista);
+                        listadeArtistasGeneral.put(esteArtista,artistaNuevo);
                     }
-                    artistaNuevo = new Artista(esteArtista);
-                    listaDeArtistas.add(artistaNuevo);
-                }
+                    listaDeArtistas.add(listadeArtistasGeneral.get(esteArtista));
+                    }
+
                 int dailyRank = Integer.parseInt(datos.get(3));
                 int dailyMovement = Integer.parseInt(datos.get(4));
                 int weeklyMovement = Integer.parseInt(datos.get(5));
@@ -95,7 +93,7 @@ public class DataLoader {
                 }else{
                     Count micount= (Count) resultado2.get(dia).get(spotifyId);
                     int valor=micount.getCount();
-                    micount.setCount(valor);
+                    micount.setCount(valor+1);
                 }
             }
         } catch (IOException e) {
