@@ -27,7 +27,9 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
             Hash HashPais = (Hash) hashtotal.get(diaString);
             if (HashPais.contains(pais)) {
                 Hash<Integer, Cancion> HashCanciones = (Hash) HashPais.get(pais);
-                System.out.println("Top 10 canciones mas escuchadas en " + pais + " en el dia " + dia);
+                System.out.println(" ");
+                System.out.println(" * * * Top 10 canciones mas escuchadas en " + pais + " en el dia " + dia +" * * * ") ;
+                System.out.println(" ");
                 for (int i = 1; i < 11; i++) {
                     if (HashCanciones.get(i) != null) {
                         System.out.println(i + "-" + HashCanciones.get(i).getNombreCancion() + " " + HashCanciones.get(i).imprimirlista());
@@ -51,6 +53,9 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
                 }
             }
             int i =1;
+            System.out.println(" ");
+            System.out.println("* * * TOP 5 CANCIONES QUE APARECEN EN MAS DE UN TOP 50 EL DIA "+ dia+ " * * * ");
+            System.out.println(" ");
             for (int k = milista.size() - 1; k > milista.size() - 6; k--) {
                 Cancion cancion = milista.get(k).getValue();
                 int ocurrencias = milista.get(k).getCount();
@@ -73,10 +78,13 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
             listaordenada.AddInOrder(listacontadora.get(k));
         }
         int i =1;
+        System.out.println(" ");
+        System.out.println("* * * TOP 7 ARTISTAS  QUE APARECEN EN MAS TOPS 50 DESDE "+ fechaInicio +" hasta "+ fechaFin );
+        System.out.println(" ");
         for (int p = listaordenada.size() - 1; p >listaordenada.size() - 8; p--) {
             Artista artista = (Artista) listaordenada.get(p).getValue();
             int Ocurrencias = listaordenada.get(p).getCount();
-            System.out.println(i + "-" + "" + artista.getNombre()+ Ocurrencias);
+            System.out.println(i + "-" + " " + artista.getNombre()+ " ocuerrencias: "+ Ocurrencias);
             i++;
         }
     }
@@ -86,16 +94,18 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
         int cantidad=0;
         Hash dia= (Hash) hashcount.get(String.valueOf(fecha));
         if (dia!=null) {
-            for (int i = 0; i < dia.getSize(); i++) {
+            for (int i = 0; i < dia.getCapacity(); i++) {
                 if (dia.getTable()[i] != null) {
-                    Count<Cancion> tempcancion = (Count) dia.getTable()[i].getValue();
+                    Count<Cancion> tempcancion = (Count<Cancion>) dia.getTable()[i].getValue();
                     if (tempcancion.getValue().getListaDeArtistas().contains(artista) && tempcancion.getValue().dailyRank < 51) {
                         cantidad += tempcancion.getCount();
                     }
                 }
             }
         }
-        System.out.println(cantidad);
+        System.out.println(" ");
+        System.out.println(artista+" aparecio"+ cantidad+ "en los Top 50 de el dia "+ dia);
+        System.out.println(" ");
     }
 
 
@@ -105,7 +115,9 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
         for (LocalDate date = fechaInicio; !date.isAfter(fechaFin); date = date.plusDays(1)) {
             milista = CancionesTempos(date, milista, tempoMenor, tempoMayor);
         }
-        System.out.println(milista.size());
+        System.out.println(" ");
+        System.out.println(milista.size()+ "canciones tienen un temp entre "+ tempoMenor +" y "+ tempoMayor +" desde "+ fechaInicio+ " hasta "+ fechaFin);
+        System.out.println(" ");
     }
 
     public MyList artistasdia(LocalDate date, MyList<Count<Artista>> listacontadora) {
