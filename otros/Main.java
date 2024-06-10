@@ -13,7 +13,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         DataLoader dataLoader = new DataLoader();
         System.out.println("ponga la direccion donde tiene guardado el archivo q quiere subir");
-        String archivoCSV = "C:\\Users\\tassa\\Documents\\ObligatorioSpotify\\SpotifyData.csv";
+        String archivoCSV = scanner.nextLine();
         boolean seguir = true;
         MyList<Hash>datos = null;
         boolean continuar = true;
@@ -29,7 +29,6 @@ public class Main {
                 case 1:
                     datos = dataLoader.cargarDatosEnHashMap(archivoCSV);
                     System.out.println("La carga de datos se realizo con exito ");
-                    System.out.println(datos);
                     break;
                 case 2:
                     while (seguir) {
@@ -59,9 +58,9 @@ public class Main {
                                 System.out.println("Ingrese la fecha (YYYY-MM-DD):");
                                 String dia = scanner.nextLine();
                                 LocalDate fecha2 = LocalDate.parse(scanner.nextLine());
-                                if(!fechaminvalida.isAfter(fecha2) && !fechamaxvalida.isBefore(fecha2)) {
+                                if (!fechaminvalida.isAfter(fecha2) && !fechamaxvalida.isBefore(fecha2)) {
                                     consultas.Top5(fecha2);
-                                }else{
+                                } else {
                                     System.out.println("Ingrese un rango de fechaas entre 2023-10-19 y 2024-05-14");
                                 }
                                 break;
@@ -71,9 +70,9 @@ public class Main {
                                 LocalDate fechaInicio = LocalDate.parse(scanner.nextLine());
                                 System.out.println("Ingrese la fecha de fin (YYYY-MM-DD):");
                                 LocalDate fechaFin = LocalDate.parse(scanner.nextLine());
-                                if (!fechaminvalida.isAfter(fechaInicio) && !fechamaxvalida.isBefore(fechaFin)) {
-                                    consultas.Top7Artistas(fechaInicio,fechaFin);}
-                                else{
+                                if (!fechaminvalida.isAfter(fechaInicio) && !fechamaxvalida.isBefore(fechaInicio) && !fechaminvalida.isAfter(fechaFin) && !fechamaxvalida.isBefore(fechaFin)) {
+                                    consultas.Top7Artistas(fechaInicio, fechaFin);
+                                } else {
                                     System.out.println("Ingrese un rango de fechaas entre 2023-10-19 y 2024-05-14");
                                 }
                                 break;
@@ -83,14 +82,12 @@ public class Main {
                                 LocalDate fecha3 = LocalDate.parse(scanner.nextLine());
                                 System.out.println("Ingrese el nombre del artista");
                                 String nombreArtista = scanner.nextLine();
-                                MyList<Artista> listaArtistas = dataLoader.getListadeArtistasGeneral();
-                                Artista artista=new Artista(nombreArtista);
-                                if(!fechaminvalida.isAfter(fecha3) && !fechamaxvalida.isBefore(fecha3)) {
-                                    consultas.Top5(fecha3);
-                                }else{
+                                Artista artista = new Artista(nombreArtista);
+                                if (!fechaminvalida.isAfter(fecha3) && !fechamaxvalida.isBefore(fecha3)) {
+                                    consultas.numeroArtistaTop(fecha3, artista);
+                                } else {
                                     System.out.println("Ingrese un rango de fechaas entre 2023-10-19 y 2024-05-14");
                                 }
-                                consultas.numeroArtistaTop(fecha3, artista);
                                 break;
                             case 5:
                                 System.out.println("Ingrese la fecha de inicio  (YYYY-MM-DD):");
@@ -102,7 +99,11 @@ public class Main {
                                 float tempoInicio = Float.parseFloat(scanner.nextLine());
                                 System.out.println("Ingrese el tempo de fin (YYYY-MM-DD):");
                                 float tempoFin = Float.parseFloat(scanner.nextLine());
-                                consultas.CantidadCanciones(fechaInicio1,fechaFin1,tempoInicio,tempoFin);
+                                if (!fechaminvalida.isAfter(fechaInicio1) && !fechamaxvalida.isBefore(fechaInicio1) && !fechaminvalida.isAfter(fechaFin1) && !fechamaxvalida.isBefore(fechaFin1)) {
+                                    consultas.CantidadCanciones(fechaInicio1, fechaFin1, tempoInicio, tempoFin);
+                                    break;
+                                }
+                                System.out.println("Ingrese un rango de fechaas entre 2023-10-19 y 2024-05-14");
                                 break;
                             case 6:
                                 System.out.println("Usted salio del menu ");

@@ -71,7 +71,9 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
         }
         for (int p = listaordenada.size() - 1; p > listaordenada.size() - 8; p--) {
             Artista artista = (Artista) listaordenada.get(p).getValue();
-            System.out.println(p + artista.getNombre());
+            int i =1;
+            System.out.println(i + "-" + "" + artista.getNombre());
+            i++;
         }
     }
 

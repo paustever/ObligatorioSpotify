@@ -15,10 +15,9 @@ public class Cancion implements Comparable<Cancion> {
     String pais;
     LocalDate snaphot_date;
     float tempo;
-    int contador;
 
 
-    public Cancion(String spotifyId, MyList<Artista> listaDeArtistas, String nombreCancion, int dailyRank, int dailyMovement, int weeklyMouvement, String pais, LocalDate snaphot_date, float tempo, int contador ) {
+    public Cancion(String spotifyId, MyList<Artista> listaDeArtistas, String nombreCancion, int dailyRank, int dailyMovement, int weeklyMouvement, String pais, LocalDate snaphot_date, float tempo ) {
         this.spotifyId= spotifyId;
         this.listaDeArtistas = listaDeArtistas;
         this.nombreCancion = nombreCancion;
@@ -28,7 +27,6 @@ public class Cancion implements Comparable<Cancion> {
         this.pais = pais;
         this.snaphot_date = snaphot_date;
         this.tempo = tempo;
-        this.contador=contador;
     }
 
 
@@ -129,7 +127,6 @@ public class Cancion implements Comparable<Cancion> {
                 ", pais='" + pais + '\'' +
                 ", snaphot_date=" + snaphot_date +
                 ", tempo=" + tempo +
-                ", contador ="+ contador+
                 '}';
     }
 

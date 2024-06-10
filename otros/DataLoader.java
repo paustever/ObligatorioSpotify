@@ -34,10 +34,7 @@ public class DataLoader {
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             String linea;
             br.readLine();
-            int contador = 0;
             while ((linea = br.readLine()) != null) {
-                contador++;
-                System.out.println(contador);
                MyList<String> datos = split(linea,"\",\"");
                 String spotifyId = datos.get(0).replace("\"", "");
                 String nombre = datos.get(1);
@@ -67,7 +64,7 @@ public class DataLoader {
                 }
                 LocalDate snapshotDate= LocalDate.parse(datos.get(7));
                 float tempo = Float.parseFloat(datos.get(23));
-                Cancion cancion = new Cancion(spotifyId, listaDeArtistas, nombre,dailyRank,dailyMovement,weeklyMovement, pais,snapshotDate,tempo, contador);
+                Cancion cancion = new Cancion(spotifyId, listaDeArtistas, nombre,dailyRank,dailyMovement,weeklyMovement, pais,snapshotDate,tempo);
                 Count<Cancion> songcount =new Count(cancion,1);
                 String dia = String.valueOf(snapshotDate);
                 if (!resultado1.contains(dia)) {
