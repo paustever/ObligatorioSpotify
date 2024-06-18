@@ -19,6 +19,8 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
 
 
     public void Top10(String pais, LocalDate dia) {
+        long meminicial=getUsedMemory();
+        long timeini= System.nanoTime();
         String diaString = String.valueOf(dia);
         MyList<Count> TopOrdenado = new LinkedList();
         if (hashtotal == null) {
@@ -37,11 +39,17 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
                 }
             }
         }
+        long difmemoria=getUsedMemory()-meminicial;
+        long diftiempo=System.nanoTime()-timeini;
+        System.out.println("diferencia de memoria: " + difmemoria);
+        System.out.println("diferencia de tiempo: " + diftiempo);
     }
 
 
     @Override
     public void Top5(LocalDate dia) {
+        long meminicial=getUsedMemory();
+        long timeini= System.nanoTime();
         String ndia = String.valueOf(dia);
         Hash<String,Count<Cancion>> mihash = (Hash) hashSimple.get(ndia);
         MyList<Count<Cancion>> milista = new LinkedList();
@@ -63,11 +71,17 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
                 i++;
             }
         }
+        long difmemoria=getUsedMemory()-meminicial;
+        long diftiempo=System.nanoTime()-timeini;
+        System.out.println("diferencia de memoria: " + difmemoria);
+        System.out.println("diferencia de tiempo: " + diftiempo);
     }
 
 
     @Override
     public void Top7Artistas(LocalDate fechaInicio, LocalDate fechaFin) {
+        long meminicial=getUsedMemory();
+        long timeini= System.nanoTime();
         MyList<Count<Artista>> listacontadora = new LinkedList<>();
         MyList<Count<Artista>> listaordenada =new LinkedList<>();
         int contador=0;
@@ -87,10 +101,16 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
             System.out.println(i + "-" + " " + artista.getNombre()+ " ocuerrencias: "+ Ocurrencias);
             i++;
         }
+        long difmemoria=getUsedMemory()-meminicial;
+        long diftiempo=System.nanoTime()-timeini;
+        System.out.println("diferencia de memoria: " + difmemoria);
+        System.out.println("diferencia de tiempo: " + diftiempo);
     }
 
     @Override
     public void numeroArtistaTop(LocalDate fecha, Artista artista) {
+        long meminicial=getUsedMemory();
+        long timeini= System.nanoTime();
         int cantidad=0;
         Hash dia= (Hash) hashSimple.get(String.valueOf(fecha));
         if (dia!=null) {
@@ -106,11 +126,17 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
         System.out.println(" ");
         System.out.println(artista+" aparecio"+ cantidad+ "en los Top 50 de el dia "+ dia);
         System.out.println(" ");
+        long difmemoria=getUsedMemory()-meminicial;
+        long diftiempo=System.nanoTime()-timeini;
+        System.out.println("diferencia de memoria: " + difmemoria);
+        System.out.println("diferencia de tiempo: " + diftiempo);
     }
 
 
     @Override
     public void CantidadCanciones(LocalDate fechaInicio, LocalDate fechaFin, float tempoMenor, float tempoMayor) {
+        long meminicial=getUsedMemory();
+        long timeini= System.nanoTime();
         MyList<Cancion> milista = new LinkedList<>();
         for (LocalDate date = fechaInicio; !date.isAfter(fechaFin); date = date.plusDays(1)) {
             milista = CancionesTempos(date, milista, tempoMenor, tempoMayor);
@@ -118,6 +144,10 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
         System.out.println(" ");
         System.out.println(milista.size()+ "canciones tienen un temp entre "+ tempoMenor +" y "+ tempoMayor +" desde "+ fechaInicio+ " hasta "+ fechaFin);
         System.out.println(" ");
+        long difmemoria=getUsedMemory()-meminicial;
+        long diftiempo=System.nanoTime()-timeini;
+        System.out.println("diferencia de memoria: " + difmemoria);
+        System.out.println("diferencia de tiempo: " + diftiempo);
     }
 
     public MyList artistasdia(LocalDate date, MyList<Count<Artista>> listacontadora) {
@@ -160,6 +190,19 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
                 }
             }
         }return milista;
+    }
+
+    public static long getUsedMemory() {
+        Runtime runtime = Runtime.getRuntime();
+        runtime.gc(); // Sugerir recolección de basura
+        try {
+            Thread.sleep(100); // Esperar un poco para que el recolector de basura termine su trabajo
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        long totalMemory = runtime.totalMemory();
+        long freeMemory = runtime.freeMemory();
+        return totalMemory - freeMemory;
     }
 
 }

@@ -13,45 +13,50 @@ import java.time.LocalDate;
 
 
 public class DataLoader {
-    MyHash<String,  Artista> listadeArtistasGeneral;
-    public DataLoader() throws FileNotFoundException {
-        this.listadeArtistasGeneral = new Hash<>();
+    MyList< Artista> listadeArtistasGeneral;
+    public DataLoader() {
+        this.listadeArtistasGeneral = new TADS.LinkedList.src.LinkedList<>();
     }
 
-    public MyHash getListadeArtistasGeneral() {
+    public MyList<Artista> getListadeArtistasGeneral() {
         return listadeArtistasGeneral;
     }
 
-    public void setListadeArtistasGeneral(MyHash listadeArtistasGeneral) {
+    public void setListadeArtistasGeneral(MyList<Artista> listadeArtistasGeneral) {
         this.listadeArtistasGeneral = listadeArtistasGeneral;
     }
 
-    public MyList<Hash> cargarDatosEnHashMap(String archivoCSV) throws IllegalArgumentException {
+    public MyList<Hash> cargarDatosEnHashMap(String archivoCSV) {
         MyList listadehashes= new LinkedList<>();
         MyHash<String, MyHash<String, MyHash<Integer, Cancion>>> resultado1 = new Hash<>();
         MyHash<String, MyHash<String,Count<Cancion>>> resultado2=new Hash<>();
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             String linea;
             br.readLine();
+            int contador = 0;
             while ((linea = br.readLine()) != null) {
+                contador++;
                MyList<String> datos = split(linea,"\",\"");
                 String spotifyId = datos.get(0).replace("\"", "");
                 String nombre = datos.get(1);
                 String artistas = datos.get(2);
                 String[] artista = artistas.split(",");
-                for (String aritistatemp: artista){
-                    aritistatemp.replace(" ", "");
-                }
                 MyList<Artista> listaDeArtistas = new LinkedList<>();
                 for (String esteArtista : artista) {
-                    esteArtista= esteArtista.trim();
-                    if(!listadeArtistasGeneral.contains(esteArtista)){
-                        Artista artistaNuevo= new Artista(esteArtista);
-                        listadeArtistasGeneral.put(esteArtista,artistaNuevo);
+                    Artista artistaNuevo= null;
+                    for (int i = 0 ; i<listadeArtistasGeneral.size(); i ++){
+                        if ( listaDeArtistas.get(i).getNombre().equals(esteArtista)){
+                            artistaNuevo= listaDeArtistas.get(i);
+                            listaDeArtistas.add(artistaNuevo);
+                            if(!listadeArtistasGeneral.contains(artistaNuevo)){
+                                listadeArtistasGeneral.add(artistaNuevo);
+                            }
+                        }
                     }
-                    listaDeArtistas.add(listadeArtistasGeneral.get(esteArtista));
-                    }
-
+                    artistaNuevo = new Artista(esteArtista);
+                    listaDeArtistas.add(artistaNuevo);
+                }
+                System.out.println(datos);
                 int dailyRank = Integer.parseInt(datos.get(3));
                 int dailyMovement = Integer.parseInt(datos.get(4));
                 int weeklyMovement = Integer.parseInt(datos.get(5));
@@ -73,16 +78,7 @@ public class DataLoader {
                     countryMap.put(pais, new Hash<>());
                 }
                 MyHash<Integer, Cancion> songMap = countryMap.get(pais);
-                boolean continuar = false;
-                while (!continuar){
-                    try {
-                        songMap.put(dailyRank, cancion);
-                        continuar= true;
-                    }catch(IllegalArgumentException e){
-                        dailyRank++;
-                    }
-                }
-
+                songMap.put(dailyRank, cancion);
 
                 if(!resultado2.contains(dia)){
                     resultado2.put(dia,new Hash<>());
@@ -90,15 +86,13 @@ public class DataLoader {
                 if(!resultado2.get(dia).contains((songcount.getValue().getSpotifyId()))){
                     resultado2.get(dia).put(spotifyId,songcount);
                 }else{
-                    Count micount= (Count) resultado2.get(dia).get(spotifyId);
-                    int valor=micount.getCount();
-                    micount.setCount(valor+1);
+                    Count micount= (Count) resultado2.get(spotifyId);
+                    int valor=micount.getCount()+1;
+                    micount.setCount(valor);
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | IllegalArgumentException  e) {
             System.out.println("hubo algun problema");
-        } catch (IllegalArgumentException  e){
-            System.out.println("hubo otro problema");
         }
         listadehashes.add((Hash) resultado1);
         listadehashes.add((Hash) resultado2);
@@ -125,8 +119,6 @@ public class DataLoader {
 
         return lista;
     }
-
-
 }
 
 
