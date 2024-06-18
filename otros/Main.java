@@ -56,6 +56,7 @@ public class Main {
                         ConsultasSpotify consultas = new ConsultasSpotify(datos);
                         int opcion2 = scanner.nextInt();
                         switch (opcion2) {
+
                             case 1:
                                 System.out.println("Ingrese el país:");
                                 String pais = scanner.nextLine();
@@ -66,7 +67,7 @@ public class Main {
                                     consultas.Top10(pais, fecha);
                                     System.out.println(" ");
                                 } else {
-                                    System.out.println("Ingrese un rango de fechaas entre 2023-10-19 y 2024-05-14");
+                                    System.out.println("Ingrese un rango de fechas entre 2023-10-19 y 2024-05-14");
                                     System.out.println(" ");
                                 }
                                 break;
@@ -154,6 +155,7 @@ public class Main {
                     System.out.println(" ");
             }
         }
+        
     }
 }
 
