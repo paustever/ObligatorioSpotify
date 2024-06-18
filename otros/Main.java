@@ -15,6 +15,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException, IllegalArgumentException {
         Scanner scanner = new Scanner(System.in);
         DataLoader dataLoader = new DataLoader();
+        String lufar="C:\\Users\\paula\\Desktop\\Obligatorio\\universal_top_spotify_songs.csv";
         long meminicial=getUsedMemory();
         long timeini= System.nanoTime();
         boolean seguir = true;
