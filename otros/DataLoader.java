@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 
-
 public class DataLoader {
     MyHash<String,  Artista> listadeArtistasGeneral;
     public DataLoader() throws FileNotFoundException {

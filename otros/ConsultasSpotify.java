@@ -10,11 +10,11 @@ import java.time.LocalDate;
 
 public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
     MyHash<String, MyHash<String, MyHash<Integer, Cancion>>> hashtotal;
-    MyHash<String, MyHash<String, Count>> hashcount;
+    MyHash<String, MyHash<String, Count>> hashSimple;
 
     public ConsultasSpotify(MyList<Hash> datos) {
         this.hashtotal = datos.get(0);
-        this.hashcount = datos.get(1);
+        this.hashSimple = datos.get(1);
     }
 
 
@@ -43,7 +43,7 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
     @Override
     public void Top5(LocalDate dia) {
         String ndia = String.valueOf(dia);
-        Hash<String,Count<Cancion>> mihash = (Hash) hashcount.get(ndia);
+        Hash<String,Count<Cancion>> mihash = (Hash) hashSimple.get(ndia);
         MyList<Count<Cancion>> milista = new LinkedList();
         if (mihash!=null) {
             for (int i = 0; i < mihash.getCapacity(); i++) {
@@ -92,7 +92,7 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
     @Override
     public void numeroArtistaTop(LocalDate fecha, Artista artista) {
         int cantidad=0;
-        Hash dia= (Hash) hashcount.get(String.valueOf(fecha));
+        Hash dia= (Hash) hashSimple.get(String.valueOf(fecha));
         if (dia!=null) {
             for (int i = 0; i < dia.getCapacity(); i++) {
                 if (dia.getTable()[i] != null) {
@@ -121,7 +121,7 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
     }
 
     public MyList artistasdia(LocalDate date, MyList<Count<Artista>> listacontadora) {
-        Hash<String, Count> hashtemp = (Hash<String, Count>) hashcount.get(String.valueOf(date));
+        Hash<String, Count> hashtemp = (Hash<String, Count>) hashSimple.get(String.valueOf(date));
         if (hashtemp!= null) {
             for (int i = 0; i < hashtemp.getCapacity(); i++) {
                 if (hashtemp.getTable()[i] != null) {
@@ -147,10 +147,10 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
 
     public MyList<Cancion> CancionesTempos(LocalDate dia, MyList<Cancion> milista, float tempoMenor, float tempoMayor) {
         String diaString = String.valueOf(dia);
-        if (hashcount == null) {
+        if (hashSimple == null) {
             return null;
-        } else if (hashcount.contains(diaString)) {
-            Hash<String,Count<Cancion>> hashdia = (Hash) hashcount.get(diaString);
+        } else if (hashSimple.contains(diaString)) {
+            Hash<String,Count<Cancion>> hashdia = (Hash) hashSimple.get(diaString);
             for (int i = 0; i < hashdia.getCapacity(); i++) {
                 if (hashdia.getTable()[i] != null) {
                     Cancion tempcancion= hashdia.getTable()[i].getValue().getValue();
