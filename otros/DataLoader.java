@@ -98,8 +98,10 @@ public class DataLoader {
             }
         } catch (IOException e) {
             System.out.println("hubo algun problema");
+            return null;
         } catch (IllegalArgumentException  e){
             System.out.println("hubo otro problema");
+            return null;
         }
         listadehashes.add((Hash) resultado1);
         listadehashes.add((Hash) resultado2);

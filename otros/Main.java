@@ -9,10 +9,14 @@ import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import static otros.ConsultasSpotify.getUsedMemory;
+
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, IllegalArgumentException {
         Scanner scanner = new Scanner(System.in);
         DataLoader dataLoader = new DataLoader();
+        long meminicial=getUsedMemory();
+        long timeini= System.nanoTime();
         boolean seguir = true;
         MyList<Hash>datos = null;
         boolean continuar = true;
@@ -36,9 +40,14 @@ public class Main {
                     String archivoCSV = scanner.nextLine();
                     archivoCSV= scanner.nextLine();
                     datos = dataLoader.cargarDatosEnHashMap(archivoCSV);
-                    System.out.println("La carga de datos se realizo con exito ");
+                    if(datos!=null){
+                        System.out.println("La carga de datos se realizo con exito ");
+                    }
                     System.out.println(" ");
-
+                    long difmemoria=getUsedMemory()-meminicial;
+                    long diftiempo=System.nanoTime()-timeini;
+                    System.out.println("diferencia de memoria: " + difmemoria);
+                    System.out.println("diferencia de tiempo: " + diftiempo);
                     break;
                 case 2:
                     while (seguir) {
