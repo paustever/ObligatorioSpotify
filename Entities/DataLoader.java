@@ -1,4 +1,4 @@
-package otros;
+package Entities;
 
 import TADS.LinkedList.src.LinkedList;
 import TADS.hash.Hash;
@@ -6,7 +6,6 @@ import TADS.hash.IllegalArgumentException;
 import TADS.hash.MyHash;
 import TADS.LinkedList.src.MyList;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;

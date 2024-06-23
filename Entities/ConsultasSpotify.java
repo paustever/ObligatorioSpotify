@@ -1,4 +1,4 @@
-package otros;
+package Entities;
 
 import TADS.LinkedList.src.LinkedList;
 import TADS.hash.Hash;

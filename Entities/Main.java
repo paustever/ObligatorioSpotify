@@ -1,8 +1,7 @@
-package otros;
+package Entities;
 
 import TADS.hash.Hash;
 import TADS.hash.IllegalArgumentException;
-import TADS.hash.MyHash;
 import TADS.LinkedList.src.MyList;
 
 import java.io.FileNotFoundException;

@@ -1,6 +1,4 @@
-package otros;
-
-import TADS.LinkedList.src.MyList;
+package Entities;
 
 import java.time.LocalDate;
 
