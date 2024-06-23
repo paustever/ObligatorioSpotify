@@ -34,6 +34,7 @@ public class DataLoader {
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCSV))) {
             String linea;
             br.readLine();
+            System.out.println("Cargando...");
             while ((linea = br.readLine()) != null) {
                MyList<String> datos = split(linea,"\",\"");
                 String spotifyId = datos.get(0).replace("\"", "");
@@ -96,11 +97,8 @@ public class DataLoader {
                     micount.setCount(valor+1);
                 }
             }
-        } catch (IOException e) {
-            System.out.println("hubo algun problema");
-            return null;
-        } catch (IllegalArgumentException  e){
-            System.out.println("hubo otro problema");
+        } catch (IOException | IllegalArgumentException e) {
+            System.out.println("La carga de datos no se pudo realizar");
             return null;
         }
         listadehashes.add((Hash) resultado1);

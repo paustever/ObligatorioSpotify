@@ -19,8 +19,6 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
 
 
     public void Top10(String pais, LocalDate dia) {
-        long meminicial=getUsedMemory();
-        long timeini= System.nanoTime();
         String diaString = String.valueOf(dia);
         MyList<Count> TopOrdenado = new LinkedList();
         if (hashtotal == null) {
@@ -30,7 +28,7 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
             if (HashPais.contains(pais)) {
                 Hash<Integer, Cancion> HashCanciones = (Hash) HashPais.get(pais);
                 System.out.println(" ");
-                System.out.println(" * * * Top 10 canciones mas escuchadas en " + pais + " en el dia " + dia +" * * * ") ;
+                System.out.println(" * * * Top 10 canciones mas escuchadas en " + pais + " en el dia " + dia + " * * * ");
                 System.out.println(" ");
                 for (int i = 1; i < 11; i++) {
                     if (HashCanciones.get(i) != null) {
@@ -39,81 +37,64 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
                 }
             }
         }
-        long difmemoria=getUsedMemory()-meminicial;
-        long diftiempo=System.nanoTime()-timeini;
-        System.out.println("diferencia de memoria: " + difmemoria);
-        System.out.println("diferencia de tiempo: " + diftiempo);
     }
-
 
     @Override
     public void Top5(LocalDate dia) {
-        long meminicial=getUsedMemory();
-        long timeini= System.nanoTime();
         String ndia = String.valueOf(dia);
-        Hash<String,Count<Cancion>> mihash = (Hash) hashcount.get(ndia);
+        Hash<String, Count<Cancion>> mihash = (Hash) hashcount.get(ndia);
         MyList<Count<Cancion>> milista = new LinkedList();
-        if (mihash!=null) {
+        if (mihash != null) {
             for (int i = 0; i < mihash.getCapacity(); i++) {
                 if (mihash.getTable()[i] != null && mihash.getTable()[i].getValue().getValue().dailyRank < 51) {
                     Count micount = (Count) mihash.getTable()[i].getValue();
                     milista.AddInOrder(micount);
                 }
             }
-            int i =1;
+            int i = 1;
             System.out.println(" ");
-            System.out.println("* * * TOP 5 CANCIONES QUE APARECEN EN MAS DE UN TOP 50 EL DIA "+ dia+ " * * * ");
+            System.out.println("* * * TOP 5 CANCIONES QUE APARECEN EN MAS DE UN TOP 50 EL DIA " + dia + " * * * ");
             System.out.println(" ");
             for (int k = milista.size() - 1; k > milista.size() - 6; k--) {
                 Cancion cancion = milista.get(k).getValue();
                 int ocurrencias = milista.get(k).getCount();
-                System.out.println(i+ "- " + cancion.getNombreCancion() + " ocurrencias: "+ ocurrencias);
+                System.out.println(i + "- " + cancion.getNombreCancion() + " ocurrencias: " + ocurrencias);
                 i++;
             }
         }
-        long difmemoria=getUsedMemory()-meminicial;
-        long diftiempo=System.nanoTime()-timeini;
-        System.out.println("diferencia de memoria: " + difmemoria);
-        System.out.println("diferencia de tiempo: " + diftiempo);
     }
 
 
     @Override
     public void Top7Artistas(LocalDate fechaInicio, LocalDate fechaFin) {
-        long meminicial=getUsedMemory();
-        long timeini= System.nanoTime();
         MyList<Count<Artista>> listacontadora = new LinkedList<>();
-        MyList<Count<Artista>> listaordenada =new LinkedList<>();
-        int contador=0;
+        MyList<Count<Artista>> listaordenada = new LinkedList<>();
+        int contador = 0;
         for (LocalDate date = fechaInicio; !date.isAfter(fechaFin); date = date.plusDays(1)) {
-            listacontadora=artistasdia(date,listacontadora);
-            }
-        for(int k=0; k<listacontadora.size();k++){
+            listacontadora = artistasdia(date, listacontadora);
+        }
+        for (int k = 0; k < listacontadora.size(); k++) {
             listaordenada.AddInOrder(listacontadora.get(k));
         }
-        int i =1;
+        int i = 1;
         System.out.println(" ");
-        System.out.println("* * * TOP 7 ARTISTAS  QUE APARECEN EN MAS TOPS 50 DESDE "+ fechaInicio +" hasta "+ fechaFin );
+        System.out.println("* * * TOP 7 ARTISTAS  QUE APARECEN EN MAS TOPS 50 DESDE " + fechaInicio + " hasta " + fechaFin);
         System.out.println(" ");
-        for (int p = listaordenada.size() - 1; p >listaordenada.size() - 8; p--) {
+        for (int p = listaordenada.size() - 1; p > listaordenada.size() - 8; p--) {
+            if (listaordenada.get(p) != null) {
             Artista artista = (Artista) listaordenada.get(p).getValue();
             int Ocurrencias = listaordenada.get(p).getCount();
-            System.out.println(i + "-" + " " + artista.getNombre()+ " ocuerrencias: "+ Ocurrencias);
+            System.out.println(i + "-" + " " + artista.getNombre() + " ocuerrencias: " + Ocurrencias);
             i++;
-        }
-        long difmemoria=getUsedMemory()-meminicial;
-        long diftiempo=System.nanoTime()-timeini;
-        System.out.println("diferencia de memoria: " + difmemoria);
-        System.out.println("diferencia de tiempo: " + diftiempo);
+        }}
+
     }
 
     @Override
     public void numeroArtistaTop(LocalDate fecha, Artista artista) {
-        long meminicial=getUsedMemory();
-        long timeini= System.nanoTime();
-        int cantidad=0;
-        Hash dia= (Hash) hashcount.get(String.valueOf(fecha));
-        if (dia!=null) {
+        int cantidad = 0;
+        Hash dia = (Hash) hashcount.get(String.valueOf(fecha));
+        if (dia != null) {
             for (int i = 0; i < dia.getCapacity(); i++) {
                 if (dia.getTable()[i] != null) {
                     Count<Cancion> tempcancion = (Count<Cancion>) dia.getTable()[i].getValue();
@@ -124,35 +105,25 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
             }
         }
         System.out.println(" ");
-        System.out.println(artista+" aparecio"+ cantidad+ "en los Top 50 de el dia "+ dia);
+        System.out.println("El artista de nombre: " + artista.getNombre() + " aparecio " + cantidad + " veces en los Top 50 de el dia " + fecha);
         System.out.println(" ");
-        long difmemoria=getUsedMemory()-meminicial;
-        long diftiempo=System.nanoTime()-timeini;
-        System.out.println("diferencia de memoria: " + difmemoria);
-        System.out.println("diferencia de tiempo: " + diftiempo);
     }
 
 
     @Override
     public void CantidadCanciones(LocalDate fechaInicio, LocalDate fechaFin, float tempoMenor, float tempoMayor) {
-        long meminicial=getUsedMemory();
-        long timeini= System.nanoTime();
         MyList<Cancion> milista = new LinkedList<>();
         for (LocalDate date = fechaInicio; !date.isAfter(fechaFin); date = date.plusDays(1)) {
             milista = CancionesTempos(date, milista, tempoMenor, tempoMayor);
         }
         System.out.println(" ");
-        System.out.println(milista.size()+ "canciones tienen un temp entre "+ tempoMenor +" y "+ tempoMayor +" desde "+ fechaInicio+ " hasta "+ fechaFin);
+        System.out.println(milista.size() + " canciones tienen un temp entre " + tempoMenor + " y " + tempoMayor + " desde " + fechaInicio + " hasta " + fechaFin);
         System.out.println(" ");
-        long difmemoria=getUsedMemory()-meminicial;
-        long diftiempo=System.nanoTime()-timeini;
-        System.out.println("diferencia de memoria: " + difmemoria);
-        System.out.println("diferencia de tiempo: " + diftiempo);
     }
 
     public MyList artistasdia(LocalDate date, MyList<Count<Artista>> listacontadora) {
         Hash<String, Count> hashtemp = (Hash<String, Count>) hashcount.get(String.valueOf(date));
-        if (hashtemp!= null) {
+        if (hashtemp != null) {
             for (int i = 0; i < hashtemp.getCapacity(); i++) {
                 if (hashtemp.getTable()[i] != null) {
                     Cancion tempcancion = (Cancion) hashtemp.getTable()[i].getValue().getValue();
@@ -171,7 +142,8 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
                     }
                 }
             }
-        } return listacontadora;
+        }
+        return listacontadora;
     }
 
 
@@ -180,29 +152,19 @@ public class ConsultasSpotify<V extends Comparable<V>> implements Consultas {
         if (hashcount == null) {
             return null;
         } else if (hashcount.contains(diaString)) {
-            Hash<String,Count<Cancion>> hashdia = (Hash) hashcount.get(diaString);
+            Hash<String, Count<Cancion>> hashdia = (Hash) hashcount.get(diaString);
             for (int i = 0; i < hashdia.getCapacity(); i++) {
                 if (hashdia.getTable()[i] != null) {
-                    Cancion tempcancion= hashdia.getTable()[i].getValue().getValue();
-                    if(!milista.contains(tempcancion) && tempcancion.tempo < tempoMayor && tempcancion.tempo > tempoMenor ){
-                       milista.add(tempcancion);
+                    Cancion tempcancion = hashdia.getTable()[i].getValue().getValue();
+                    if (!milista.contains(tempcancion) && tempcancion.tempo < tempoMayor && tempcancion.tempo > tempoMenor) {
+                        milista.add(tempcancion);
                     }
                 }
             }
-        }return milista;
+        }
+        return milista;
     }
 
-    public static long getUsedMemory() {
-        Runtime runtime = Runtime.getRuntime();
-        runtime.gc(); // Sugerir recolección de basura
-        try {
-            Thread.sleep(100); // Esperar un poco para que el recolector de basura termine su trabajo
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        long totalMemory = runtime.totalMemory();
-        long freeMemory = runtime.freeMemory();
-        return totalMemory - freeMemory;
-    }
+
 
 }
